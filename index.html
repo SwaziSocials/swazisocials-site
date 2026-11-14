@@ -1,0 +1,1024 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+
+<title>Swazi Socials</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500&family=Josefin+Sans:wght@300;400&display=swap">
+<style>
+/* Layout: one day with Swazi. A fixed 8-bit sky moves from sunrise to night as you scroll; every section is a clean sheet floating over it, pinned to an hour of the day, ending in the night garden. */
+:root{
+  --paper:#FBFAF7; --paper-2:#F3F0EA; --card:#FFFFFF;
+  --ink:#121212; --muted:#5A6163; --faint:#8C9193;
+  --lagoon:#006E87; --lagoon-ink:#00596E; --ocean:#A6D9E8; --ocean-wash:#E5F3F7;
+  --coral:#F3A38A; --gold:#E8B756; --lavender:#B6A6FF; --pink:#E58BB0;
+  --line:rgba(18,18,18,.1); --line-2:rgba(18,18,18,.22);
+  --night:#0B0D0E; --night-ink:#EDEBE6;
+  --display:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --body:"Inter","Helvetica Neue",Arial,system-ui,sans-serif;
+  --pixel:"Silkscreen","Courier New",monospace;
+  --wrap:1160px; --gutter:clamp(12px,3.4vw,40px);
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --shadow:0 40px 90px -50px rgba(30,24,70,.45),0 2px 0 rgba(255,255,255,.6) inset;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --paper:#111617; --paper-2:#172022; --card:#1A2325; --ink:#F1EEE8; --muted:#A9B2B4; --faint:#7F898B;
+  --lagoon:#5CB8CF; --lagoon-ink:#8FD3E4; --ocean-wash:#16282D; --line:rgba(241,238,232,.12); --line-2:rgba(241,238,232,.26);
+  --shadow:0 40px 90px -50px rgba(0,0,0,.8); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#111617; --paper-2:#172022; --card:#1A2325; --ink:#F1EEE8; --muted:#A9B2B4; --faint:#7F898B;
+  --lagoon:#5CB8CF; --lagoon-ink:#8FD3E4; --ocean-wash:#16282D; --line:rgba(241,238,232,.12); --line-2:rgba(241,238,232,.26);
+  --shadow:0 40px 90px -50px rgba(0,0,0,.8); color-scheme:dark}
+*{box-sizing:border-box}
+html{background:#9DB7E6;scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;background:transparent;color:var(--ink);font-family:var(--body);font-weight:300;font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.04;margin:0;letter-spacing:-.01em;text-wrap:balance}
+p{margin:0}a{color:inherit}img{display:block;max-width:100%}
+:focus-visible{outline:2px solid var(--lagoon);outline-offset:3px}
+#sky{position:fixed;inset:0;width:100vw;height:100vh;z-index:-1;image-rendering:pixelated;display:block}
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:var(--gutter)}
+.px-label,.eyebrow{font-family:var(--pixel);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--lagoon-ink);display:inline-flex;align-items:center;gap:10px}
+.time{font-family:var(--pixel);font-size:.72rem;letter-spacing:.06em;color:var(--lagoon-ink);display:inline-flex;align-items:center;gap:10px}
+.time i{width:10px;height:10px;background:var(--gold);box-shadow:0 0 0 2px color-mix(in srgb,var(--gold) 35%,transparent)}
+.time.pm i{background:var(--coral)}.time.eve i{background:var(--lavender)}
+.btn{display:inline-flex;align-items:center;gap:10px;font:500 .72rem var(--body);letter-spacing:.16em;text-transform:uppercase;padding:15px 24px;border-radius:999px;border:1px solid transparent;text-decoration:none;cursor:pointer;transition:background .3s,color .3s,transform .3s var(--ease),box-shadow .3s}
+.btn svg{width:15px;height:15px}
+.btn-solid{background:var(--ink);color:var(--paper)}
+.btn-solid:hover{background:var(--lagoon);color:#fff;transform:translateY(-2px)}
+.btn-line{border-color:var(--line-2);color:var(--ink);background:color-mix(in srgb,var(--paper) 55%,transparent);backdrop-filter:blur(6px)}
+.btn-line:hover{border-color:var(--ink)}
+.rv{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.rv.in{opacity:1;transform:none}
+
+/* header */
+header.site{position:fixed;top:0;left:0;right:0;z-index:50;padding-top:env(safe-area-inset-top,0px);transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
+header.site.solid{background:color-mix(in srgb,var(--paper) 80%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:var(--line)}
+header.site.night{background:rgba(11,13,14,.72);border-color:rgba(255,255,255,.08);color:#EDEBE6}
+header.site.night .wordmark{filter:invert(1)}
+header.site.night .btn-solid{background:#EDEBE6;color:#111}
+header.site.night .clock{color:#A6D9E8;border-color:rgba(255,255,255,.18)}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:66px}
+.wordmark{display:block;height:44px;width:auto;transition:filter .4s}
+nav.main{display:flex;gap:24px}
+nav.main a{text-decoration:none;font-size:.7rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;opacity:.75}
+nav.main a:hover{opacity:1}
+.right{display:flex;align-items:center;gap:12px}
+.clock{display:inline-flex;align-items:center;gap:8px;font-family:var(--pixel);font-size:.7rem;color:var(--lagoon-ink);border:1px solid var(--line-2);border-radius:999px;padding:7px 12px;white-space:nowrap;min-width:104px;justify-content:center}
+#clock-ic{width:10px;height:10px;background:var(--gold);box-shadow:0 0 6px var(--gold)}
+#clock-ic[data-night="1"]{background:#F2EEDC;box-shadow:0 0 6px #F2EEDC}
+.bar .btn{padding:11px 18px;font-size:.66rem}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) header.site .wordmark{filter:invert(1)}}
+:root[data-theme="dark"] header.site .wordmark{filter:invert(1)}
+@media (max-width:980px){nav.main{display:none}}
+@media (max-width:560px){.wordmark{height:32px}.clock{min-width:0;padding:6px 9px;font-size:.6rem}.bar .btn{padding:10px 13px;letter-spacing:.1em}}
+@media (max-width:380px){.bar .btn{display:none}}
+
+/* sheets */
+section.sheet{padding-block:clamp(40px,7vw,96px)}
+.panel{max-width:var(--wrap);margin-inline:auto;background:color-mix(in srgb,var(--paper) 93%,transparent);backdrop-filter:blur(16px) saturate(1.1);-webkit-backdrop-filter:blur(16px) saturate(1.1);border-radius:32px;box-shadow:var(--shadow);padding:clamp(26px,5vw,64px);border:1px solid color-mix(in srgb,#fff 40%,transparent)}
+.outer{padding-inline:var(--gutter)}
+.head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr);gap:18px 48px;align-items:end;margin-bottom:clamp(28px,4vw,48px)}
+.head h2{font-size:clamp(2.3rem,5vw,4.1rem);margin-top:14px}
+.head h2 em{font-style:italic;color:var(--lagoon-ink)}
+.head .lede{color:var(--muted);max-width:46ch}
+@media (max-width:820px){.head{grid-template-columns:1fr}}
+
+/* hero */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:110px 0 clamp(120px,18vh,180px)}
+.hero .wrap{width:100%;position:relative}
+.hero .glow{position:absolute;left:-6%;top:-12%;width:min(760px,100%);height:124%;background:radial-gradient(ellipse at 35% 50%,color-mix(in srgb,#FFF8F2 80%,transparent),transparent 68%);filter:blur(10px);z-index:-1;pointer-events:none}
+.hero h1{font-size:clamp(3.1rem,8.6vw,7.4rem);max-width:12ch;margin-top:18px;color:#141414}
+.hero h1 em{font-style:italic;color:#00596E}
+.hero .lede{max-width:52ch;margin-top:20px;font-size:clamp(1rem,1.4vw,1.14rem);color:#2E3436}
+.hero .time{color:#00596E}
+.hero .actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.hero .btn-solid{background:#121212;color:#FBFAF7}
+.hero .btn-line{color:#121212;border-color:rgba(18,18,18,.3);background:rgba(255,255,255,.4)}
+.pillars{margin-top:clamp(36px,6vw,64px);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;max-width:900px}
+.pillar{background:color-mix(in srgb,var(--paper) 80%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid color-mix(in srgb,#fff 50%,transparent);border-radius:20px;padding:18px 20px;display:flex;flex-direction:column;gap:6px;transition:transform .4s var(--ease)}
+.pillar:hover{transform:translateY(-4px)}
+.pillar b{font-family:var(--display);font-weight:500;font-size:1.4rem;display:flex;align-items:center;gap:10px}
+.pillar span{font-size:.86rem;color:var(--muted)}
+@media (max-width:720px){.pillars{grid-template-columns:1fr}}
+canvas.px{display:block;width:48px;height:48px;image-rendering:pixelated}
+canvas.px.sm{width:28px;height:28px}
+
+/* offers */
+.feature{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(22px,4vw,52px);background:var(--card);border:1px solid var(--line);border-radius:24px;padding:clamp(22px,3.4vw,40px)}
+.feature h3{font-size:clamp(1.9rem,3.4vw,2.7rem);margin:10px 0 12px}
+.feature .lede{color:var(--muted)}
+.feature ul{margin:18px 0 0;padding:0;list-style:none;display:grid;gap:9px}
+.feature li{display:flex;gap:12px;align-items:baseline;font-size:.95rem}
+.feature li::before{content:"";flex:none;width:7px;height:7px;background:var(--lagoon);transform:translateY(-2px)}
+.feature .note{margin-top:16px;font-size:.84rem;color:var(--faint)}
+.tiers{display:grid;gap:10px;align-content:start}
+.tier{position:relative;border:1px solid var(--line-2);border-radius:18px;padding:18px 20px;display:grid;grid-template-columns:1fr auto;gap:2px 16px;align-items:baseline;transition:border-color .3s,transform .4s var(--ease),background .3s;cursor:default}
+.tier:hover{border-color:var(--lagoon);transform:translateX(4px);background:var(--ocean-wash)}
+.tier b{font-family:var(--display);font-weight:500;font-size:1.4rem}
+.tier .p{font-family:var(--display);font-size:1.7rem;grid-row:span 2;align-self:center}
+.tier .p small{font-family:var(--body);font-size:.72rem;color:var(--muted)}
+.tier span{font-size:.84rem;color:var(--muted)}
+.tier.pop{border-color:var(--lagoon);background:var(--ocean-wash)}
+.tier.pop b::after{content:"Most chosen";margin-left:10px;vertical-align:middle;font-family:var(--pixel);font-size:.55rem;letter-spacing:.06em;background:var(--lagoon);color:#fff;padding:3px 8px}
+@media (max-width:860px){.feature{grid-template-columns:1fr}}
+.card-label{margin:clamp(30px,4vw,44px) 0 10px;font-family:var(--pixel);font-size:.66rem;color:var(--faint);text-transform:uppercase}
+.rate details{border-top:1px solid var(--line)}
+.rate details:last-child{border-bottom:1px solid var(--line)}
+.rate summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:1fr auto auto;gap:4px 18px;align-items:center;padding:20px 4px;transition:padding .3s var(--ease)}
+.rate summary::-webkit-details-marker{display:none}
+.rate summary:hover{padding-left:12px}
+.rate h3{font-size:clamp(1.35rem,2.2vw,1.7rem)}
+.rate .p{font-family:var(--display);font-size:1.35rem;text-align:right;line-height:1.1}
+.rate .p small{display:block;font-family:var(--body);font-size:.66rem;letter-spacing:.06em;color:var(--faint)}
+.rate .x{width:32px;height:32px;border:1px solid var(--line-2);border-radius:50%;display:grid;place-items:center;transition:transform .4s var(--ease),background .3s}
+.rate .x svg{width:13px;height:13px}
+.rate details[open] .x{transform:rotate(45deg);background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.rate .sub{grid-column:1/-1;font-size:.88rem;color:var(--muted)}
+.rate .body{padding:0 4px 24px;display:grid;gap:12px;color:var(--muted);max-width:70ch}
+.rate .body ul{margin:0;padding:0;list-style:none;display:grid;gap:6px}
+.rate .body li{display:flex;gap:10px;align-items:baseline;color:var(--ink);font-size:.93rem}
+.rate .body li::before{content:"";flex:none;width:6px;height:6px;background:var(--coral);transform:translateY(-2px)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{font-family:var(--pixel);font-size:.62rem;border:1px solid var(--line-2);padding:6px 10px;color:var(--ink)}
+@media (max-width:560px){.rate summary{grid-template-columns:1fr auto}.rate .p{grid-column:1;grid-row:2;text-align:left}.rate .x{grid-row:1;grid-column:2}}
+
+/* steps: vertical timeline that fills as you scroll */
+.proc{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(28px,5vw,72px);align-items:start}
+.proc-head{position:sticky;top:110px}
+.proc-head h2{font-size:clamp(2.3rem,4.6vw,3.8rem);margin:14px 0 16px}
+.proc-head h2 em{font-style:italic;color:var(--lagoon-ink)}
+.proc-head .lede{color:var(--muted);max-width:42ch}
+.proc-count{margin-top:28px;font-family:var(--pixel);font-size:1.6rem;color:var(--faint)}
+.proc-count span{color:var(--lagoon-ink)}
+.timeline{position:relative}
+.rail{position:absolute;left:24px;top:24px;bottom:24px;width:8px;background:repeating-linear-gradient(180deg,var(--line-2) 0 8px,transparent 8px 12px)}
+.rail .fill{position:absolute;left:0;top:0;width:8px;height:var(--h,0px);background:repeating-linear-gradient(180deg,var(--lagoon) 0 8px,transparent 8px 12px)}
+.rail .tip{position:absolute;left:-6px;top:calc(var(--h,0px) - 10px);width:20px;height:20px;background:var(--gold);box-shadow:0 0 0 4px color-mix(in srgb,var(--gold) 35%,transparent),0 0 18px var(--gold);image-rendering:pixelated}
+.steps{position:relative;display:grid;gap:clamp(28px,4vw,44px)}
+.step{display:grid;grid-template-columns:56px 1fr;column-gap:20px;align-items:start;opacity:.35;transform:translateX(10px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.step.lit{opacity:1;transform:none}
+.step canvas.px{grid-row:1/span 3;background:color-mix(in srgb,var(--paper) 96%,transparent);padding:4px;width:56px;height:56px;position:relative;z-index:1}
+.step .n,.step b,.step p{grid-column:2}
+.step .n{font-family:var(--pixel);font-size:.62rem;color:var(--lagoon-ink)}
+.step b{font-family:var(--display);font-weight:500;font-size:1.6rem;line-height:1.1}
+.step p{font-size:.92rem;color:var(--muted);max-width:44ch}
+.step.lit canvas.px{animation:hop .5s steps(2) 1}
+@keyframes hop{0%{transform:translateY(-6px)}100%{transform:none}}
+@media (max-width:860px){.proc{grid-template-columns:1fr}.proc-head{position:static}.proc-count{display:none}}
+
+/* work */
+.work{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.w{position:relative;display:flex;flex-direction:column;gap:12px;padding:clamp(24px,3vw,36px);border-radius:24px;text-decoration:none;border:1px solid var(--line);min-height:300px;overflow:hidden;transition:transform .5s var(--ease)}
+.w:hover{transform:translateY(-6px)}
+.w h3{font-size:clamp(1.8rem,3vw,2.4rem)}
+.w p{font-size:.92rem;opacity:.85;max-width:46ch}
+.w .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.w .tags span{font-family:var(--pixel);font-size:.58rem;border:1px solid currentColor;padding:4px 8px;opacity:.75}
+.w .go{display:inline-flex;align-items:center;gap:8px;font-size:.7rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase}
+.w .go svg{width:14px;height:14px;transition:transform .3s}
+.w:hover .go svg{transform:translateX(4px)}
+.w.tht{background:linear-gradient(160deg,#3A4528,#1F2418);color:#F1ECDE;border-color:transparent}
+.w.tht .eyebrow{color:#D9B978}
+.w.soc{background:linear-gradient(160deg,var(--ocean-wash),var(--card))}
+@media (max-width:760px){.work{grid-template-columns:1fr}}
+.partners{margin-top:clamp(30px,4vw,48px)}
+.logos{margin-top:14px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.logos a{background:#fff;border:1px solid var(--line);border-radius:16px;height:96px;display:grid;place-items:center;padding:14px 18px;transition:transform .4s var(--ease)}
+.logos a:hover{transform:translateY(-4px)}
+.logos img{max-height:56px;width:auto;max-width:100%;object-fit:contain}
+@media (max-width:760px){.logos{grid-template-columns:repeat(2,minmax(0,1fr))}.logos a:last-child{grid-column:1/-1}}
+
+/* founder */
+.founder{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(26px,5vw,64px);align-items:center}
+.fpic{position:relative;border-radius:180px 24px 24px 24px;overflow:hidden;aspect-ratio:4/5}
+.fpic img{width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+.fpic span{position:absolute;left:12px;bottom:12px;max-width:calc(100% - 24px);background:var(--paper);color:var(--ink);border-radius:999px;padding:7px 13px;font-size:.58rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.founder .copy{display:flex;flex-direction:column;gap:14px;color:var(--muted)}
+.founder blockquote{margin:6px 0;font-family:var(--display);font-style:italic;font-size:clamp(1.8rem,3.4vw,2.7rem);line-height:1.12;color:var(--lagoon-ink)}
+@media (max-width:820px){.founder{grid-template-columns:1fr}}
+@media (max-width:480px){.fpic span{white-space:normal;border-radius:14px;font-size:.54rem;line-height:1.4}}
+
+/* contact */
+.panel.dark{background:color-mix(in srgb,#111 92%,transparent);color:#F1EEE8;border-color:rgba(255,255,255,.08)}
+.contact{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:center}
+.contact h2{font-size:clamp(2.3rem,5vw,4rem);margin-top:14px}
+.contact h2 em{font-style:italic;color:#A6D9E8}
+.contact .lede{color:rgba(241,238,232,.72);margin-top:12px}
+.contact .time{color:#A6D9E8}
+.lines{margin-top:24px;display:grid}
+.line{display:grid;grid-template-columns:1fr auto;align-items:center;gap:2px 12px;padding:14px 0;border-top:1px solid rgba(255,255,255,.14)}
+.line small{grid-column:1/-1;font-family:var(--pixel);font-size:.58rem;color:rgba(241,238,232,.55)}
+.line b,.line .b{font-family:var(--display);font-weight:400;font-size:1.4rem;text-decoration:none}
+.line svg{color:#A6D9E8}
+.copybtn{font:500 .62rem var(--body);letter-spacing:.14em;text-transform:uppercase;background:transparent;color:#F1EEE8;border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:7px 12px;cursor:pointer}
+@media (max-width:860px){.contact{grid-template-columns:1fr}}
+form.interest{background:var(--card);color:var(--ink);border-radius:22px;padding:clamp(20px,3vw,30px);display:grid;grid-template-columns:1fr 1fr;gap:14px}
+form.interest label{display:flex;flex-direction:column;gap:6px;font-size:.66rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);min-width:0}
+form.interest .full{grid-column:1/-1}
+form.interest input[type=text],form.interest input[type=email],form.interest input[type=tel],form.interest textarea{font:300 1rem var(--body);letter-spacing:0;text-transform:none;color:var(--ink);background:var(--paper);border:1px solid var(--line-2);border-radius:12px;padding:12px}
+form.interest textarea{min-height:96px;resize:vertical}
+form.interest input:focus,form.interest textarea:focus{outline:none;border-color:var(--lagoon)}
+.dd-label{display:block;margin-bottom:6px;font-size:.66rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.dd summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:10px;font:300 1rem var(--body);color:var(--ink);background:var(--paper);border:1px solid var(--line-2);border-radius:12px;padding:12px}
+.dd summary::-webkit-details-marker{display:none}
+.dd summary svg{width:18px;height:18px;flex:none;transition:transform .3s}
+.dd[open] summary{border-color:var(--lagoon)}.dd[open] summary svg{transform:rotate(180deg)}
+.dd-list{margin-top:6px;border:1px solid var(--line-2);border-radius:12px;background:var(--card);padding:6px;display:flex;flex-direction:column}
+form.interest .dd-list label{flex-direction:row;align-items:center;gap:10px;font:400 .95rem var(--body);letter-spacing:0;text-transform:none;color:var(--ink);padding:9px 10px;border-radius:8px;cursor:pointer}
+form.interest .dd-list label:hover{background:var(--ocean-wash)}
+.dd-list input{accent-color:var(--lagoon);width:16px;height:16px;margin:0}
+form.interest .row{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+form.interest .btn{border:0}
+.msg{font-size:.9rem;color:var(--lagoon-ink)}.msg.err{color:#B4442F}
+.hp{position:absolute;left:-9999px}
+@media (max-width:560px){form.interest{grid-template-columns:1fr}}
+
+/* night garden + footer */
+.garden{position:relative;background:#0B0D0E;color:#EDEBE6;overflow:hidden;min-height:clamp(560px,86svh,780px);display:flex;align-items:flex-start}
+.garden::before{content:"";position:absolute;inset:0 0 auto;height:140px;background:linear-gradient(transparent,#0B0D0E);transform:translateY(-100%);pointer-events:none}
+.garden canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.garden .wrap{position:relative;z-index:1;padding-block:clamp(64px,9vw,110px) 0;width:100%}
+.garden .time{color:#A6D9E8}
+.garden .quote{margin:16px 0 0;font-family:var(--display);font-style:italic;font-weight:400;font-size:clamp(1.9rem,4.6vw,3.6rem);line-height:1.15;max-width:22ch;text-shadow:0 4px 30px rgba(0,0,0,.85)}
+.garden cite{display:block;margin-top:14px;font-family:var(--pixel);font-style:normal;font-size:.66rem;color:#A6D9E8}
+.garden .ps{margin-top:22px;font-family:var(--display);font-size:clamp(1.05rem,1.6vw,1.25rem);color:rgba(237,235,230,.86)}
+.garden .ps b{font-family:var(--pixel);font-size:.62rem;font-weight:400;color:#E8B756;margin-right:8px}
+.garden .ps a{color:#A6D9E8}
+.garden-wrap{background:#0B0D0E}
+footer.site{background:#0B0D0E;color:rgba(237,235,230,.62);border-top:1px solid rgba(255,255,255,.08);padding-block:24px 30px;font-size:.78rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:14px 28px;justify-content:space-between;align-items:center}
+footer .wordmark{height:44px;filter:invert(1);opacity:.92}
+footer .tag{font-family:var(--display);font-style:italic;font-size:1.05rem;color:#EDEBE6}
+footer nav{display:flex;flex-wrap:wrap;gap:8px 22px;width:100%}
+.fgroups{width:100%;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:22px 28px;padding-top:10px}
+.fgroups nav{flex-direction:column;gap:8px;width:auto}
+.fgroups h4{margin:0 0 4px;font:500 .62rem var(--body);letter-spacing:.18em;text-transform:uppercase;color:#EBC3B4}
+.fgroups a{text-decoration:none}.fgroups a:hover{text-decoration:underline}
+@media (max-width:860px){.fgroups{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:420px){.fgroups{grid-template-columns:1fr}}
+footer nav a{text-decoration:underline;text-underline-offset:3px}
+footer nav a:hover{color:#A6D9E8}
+.legal{background:#0B0D0E;color:rgba(237,235,230,.8);border-top:1px solid rgba(255,255,255,.08)}
+.legal .wrap{padding-block:30px 40px;display:grid;gap:14px;max-width:820px;font-size:.9rem}
+.legal h3{font-size:1.8rem;color:#EDEBE6}
+.legal h4{margin:10px 0 0;font-family:var(--pixel);font-weight:400;font-size:.66rem;color:#A6D9E8}
+.legal p{color:rgba(237,235,230,.75)}
+.legal .close{justify-self:start;margin-top:10px;background:none;color:#EDEBE6;border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:12px 22px;font:500 .7rem var(--body);letter-spacing:.16em;text-transform:uppercase;cursor:pointer}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}.step{opacity:1;transform:none}html{scroll-behavior:auto}}
+
+.portrait{margin:0;display:flex;flex-direction:column;align-items:center;gap:16px}
+.portrait img{width:min(100%,400px);height:auto;aspect-ratio:1;border-radius:50%;object-fit:cover;box-shadow:0 30px 60px -36px rgba(40,30,20,.45)}
+.portrait figcaption{font-family:var(--pixel);font-size:.62rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);text-align:center}
+@media (max-width:820px){.portrait img{width:min(78%,320px)}}
+
+/* grain edition overrides */
+:root{--pixel:"Josefin Sans","Inter",sans-serif;--paper:#EEF0EA;--card:#F7F6F1;--ink:#1F2A3A;--muted:#55606A;--lagoon:#2E3F55;--lagoon-ink:#2E3F55;--ocean-wash:#E2E8E3;--gold:#C9A46A;--coral:#C98E7E;--lavender:#9C8BA6;--shadow:0 30px 70px -50px rgba(30,30,40,.45)}
+body::after{content:"";position:fixed;inset:-50%;width:200%;height:200%;pointer-events:none;z-index:60;opacity:.06;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1.1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:grain 1.2s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
+#sky{image-rendering:auto}
+.time,.eyebrow,.px-label,.card-label,.clock,.step .n,.chips span,.w .tags span,.line small,.legal h4,.garden cite,.garden .ps b,.tier.pop b::after,.portrait figcaption{font-family:var(--pixel)!important;letter-spacing:.24em!important;font-weight:400}
+.time{font-size:.68rem;text-transform:uppercase}
+.time i{width:7px;height:7px;border-radius:50%;box-shadow:none;background:var(--gold)}
+#clock-ic{border-radius:50%;box-shadow:none}
+.clock{font-size:.62rem;letter-spacing:.18em!important}
+.panel{border-radius:10px;background:color-mix(in srgb,var(--paper) 90%,transparent);border:1px solid rgba(31,42,58,.12);backdrop-filter:blur(10px)}
+.panel.dark{background:color-mix(in srgb,#1F2A3A 94%,transparent)}
+.feature,.tier,.logos a,.w,form.interest,.pillar{border-radius:8px}
+.btn{border-radius:2px;letter-spacing:.22em}
+.btn-solid{background:#1F2A3A}
+.hero h1,.head h2,.proc-head h2,.contact h2{font-weight:400;letter-spacing:-.005em}
+.hero h1 em,.head h2 em,.proc-head h2 em,.founder blockquote{color:#2E3F55}
+.hero h1{color:#1F2A3A}
+.hero .glow{background:radial-gradient(ellipse at 35% 50%,rgba(246,240,230,.7),transparent 68%)}
+.pillar{background:color-mix(in srgb,var(--paper) 72%,transparent)}
+svg.li{display:block;width:44px;height:44px;color:#1F2A3A}
+svg.li.sm{width:26px;height:26px}
+.step svg.li{grid-row:1/span 3;width:56px;height:56px;padding:12px;background:var(--paper);border:1px solid rgba(31,42,58,.25);border-radius:50%;position:relative;z-index:1}
+.step.lit svg.li{animation:none;border-color:#1F2A3A}
+.rail{left:27px;width:2px;background:rgba(31,42,58,.15)}
+.rail .fill{width:2px;background:#1F2A3A}
+.rail .tip{left:-6px;width:14px;height:14px;border-radius:50%;background:#C9A46A;box-shadow:0 0 0 6px rgba(201,164,106,.25),0 0 22px rgba(201,164,106,.8)}
+.proc-count{font-family:var(--display)!important;font-style:italic;font-size:2.2rem}
+.tier.pop b::after{background:#1F2A3A;border-radius:2px}
+.feature li::before{border-radius:50%;width:5px;height:5px}
+.rate .body li::before{border-radius:50%}
+.chips span{border-radius:999px}
+.w.soc{background:linear-gradient(160deg,#E2E8E3,var(--card))}
+.contact h2 em,.contact .time,.line svg,.garden .time,.garden cite,.garden .ps a{color:#E3C2AE!important}
+.garden{background:#14171C}
+.garden::before{background:linear-gradient(transparent,#14171C)}
+footer.site,.legal{background:#14171C}
+
+/* bright edition: lighter, colorful, more people */
+:root{--paper:#FFFDF9;--card:#FFFFFF;--ink:#1E2433;--muted:#5A6170;--lagoon:#007C93;--lagoon-ink:#00687C;--ocean-wash:#E6F5F9;--gold:#F2B544;--coral:#F08A6C;--lavender:#9E86EA;--pink:#EC7FA6}
+.panel{background:color-mix(in srgb,#FFFFFF 90%,transparent);border-color:rgba(255,255,255,.7);border-radius:18px}
+.panel.dark{background:color-mix(in srgb,#1E2245 94%,transparent)}
+.btn-solid,.hero .btn-solid{background:#007C93;color:#fff}
+.btn-solid:hover,.hero .btn-solid:hover{background:#F08A6C;color:#fff}
+.hero h1 em{color:#007C93}.head h2 em,.proc-head h2 em{color:#E06A86}
+.founder blockquote{color:#007C93}
+#offers .time i{background:#F2B544}#process .time i{background:#F08A6C}#work .time i{background:#EC7FA6}#about .time i{background:#9E86EA}#contact .time i{background:#FFAA66}
+.time{color:#00687C}
+.pillar{background:rgba(255,255,255,.78);border-top:3px solid var(--c,#F2B544)}
+.pillar:nth-child(1){--c:#F2B544}.pillar:nth-child(2){--c:#EC7FA6}.pillar:nth-child(3){--c:#5CC6DE}
+.pillar svg.li{color:var(--c)}
+.steps .step:nth-child(6n+1) svg.li{color:#E9A21F}.steps .step:nth-child(6n+2) svg.li{color:#007C93}.steps .step:nth-child(6n+3) svg.li{color:#9E86EA}.steps .step:nth-child(6n+4) svg.li{color:#EC7FA6}.steps .step:nth-child(6n+5) svg.li{color:#2FA36B}.steps .step:nth-child(6n+6) svg.li{color:#F08A6C}
+.step.lit svg.li{border-color:currentColor}
+.rail .fill{background:linear-gradient(#F2B544,#EC7FA6,#9E86EA,#007C93)}
+.rail .tip{background:#F2B544}
+.tier.pop{background:#FFF4E8;border-color:#F08A6C}.tier.pop b::after{background:#F08A6C}
+.tier:hover{background:#E6F5F9}
+.feature li::before{background:#EC7FA6}.rate .body li::before{background:#5CC6DE}
+.w.soc{background:linear-gradient(160deg,#FDEFF4,#FFFFFF)}
+.w .shot{width:calc(100% + 2*clamp(24px,3vw,36px));margin:calc(-1*clamp(24px,3vw,36px)) calc(-1*clamp(24px,3vw,36px)) 6px;height:170px;object-fit:cover;object-position:top;max-width:none}
+.contact h2 em,.contact .time,.line svg,.garden .time,.garden cite,.garden .ps a{color:#FFC6CF!important}
+.garden,.garden-wrap,footer.site,.legal{background:#121530!important}
+.garden::before{background:linear-gradient(transparent,#121530)}
+/* photo reel */
+.reel{overflow:hidden;padding:clamp(10px,2vw,20px) 0 clamp(20px,4vw,40px)}
+.reel-track{display:flex;gap:14px;width:max-content;animation:reel 60s linear infinite}
+.reel:hover .reel-track{animation-play-state:paused}
+.reel figure{margin:0;position:relative;width:clamp(170px,20vw,240px);aspect-ratio:3/4;border-radius:18px;overflow:hidden;box-shadow:0 24px 50px -30px rgba(30,30,70,.55);border:4px solid #fff;transform:rotate(var(--r,0deg));flex:none}
+.reel figure:nth-child(3n+1){--r:-2deg}.reel figure:nth-child(3n+2){--r:1.5deg}.reel figure:nth-child(3n){--r:-.5deg}
+.reel img{width:100%;height:100%;object-fit:cover}
+.reel figcaption{position:absolute;left:10px;bottom:10px;background:rgba(255,255,255,.92);border-radius:999px;padding:4px 10px;font:500 .6rem var(--body);letter-spacing:.12em;text-transform:uppercase;color:#1E2433}
+@keyframes reel{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.reel-track{animation:none}}
+
+/* warm pass (Oct 5 call): less bright-white, warmer tinted sheets */
+#offers .panel{background:color-mix(in srgb,#FFF4E2 93%,transparent)}
+#process .panel{background:color-mix(in srgb,#FFEEF2 93%,transparent)}
+#work .panel{background:color-mix(in srgb,#F2EEFF 93%,transparent)}
+#about .panel{background:color-mix(in srgb,#FFF0E4 93%,transparent)}
+.feature,.tier,.logos a,form.interest{background:#FFFCF7}
+.pillar{background:rgba(255,248,238,.82)}
+.step svg.li{background:#FFFCF7}
+.hero .glow{background:radial-gradient(ellipse at 35% 50%,rgba(255,236,220,.6),transparent 68%)}
+
+/* midpoint pass: between the quiet sage edition and the bright edition */
+:root{--lagoon:#1F5E6E;--lagoon-ink:#1F5E6E;--coral:#D98872;--gold:#D7A752;--pink:#C9748C;--lavender:#9886C4}
+#offers .panel,#process .panel,#work .panel,#about .panel{background:color-mix(in srgb,#FBF7F0 93%,transparent)}
+.feature,.tier,.logos a,form.interest{background:#FFFDF9}
+.btn-solid,.hero .btn-solid{background:#1F3B4D;color:#fff}
+.btn-solid:hover,.hero .btn-solid:hover{background:#1F5E6E;color:#fff}
+.hero h1 em{color:#1F5E6E}.head h2 em,.proc-head h2 em{color:#B5677A}
+.founder blockquote{color:#1F5E6E}
+.time{color:#1F5E6E}
+.pillar{background:rgba(251,247,240,.85);border-top:2px solid var(--c)}
+.pillar:nth-child(1){--c:#D7A752}.pillar:nth-child(2){--c:#C9748C}.pillar:nth-child(3){--c:#5E9FB0}
+.steps .step:nth-child(6n+1) svg.li{color:#B88A3A}.steps .step:nth-child(6n+2) svg.li{color:#1F5E6E}.steps .step:nth-child(6n+3) svg.li{color:#7D6BAA}.steps .step:nth-child(6n+4) svg.li{color:#B5677A}.steps .step:nth-child(6n+5) svg.li{color:#3F8A64}.steps .step:nth-child(6n+6) svg.li{color:#C0735C}
+.rail .fill{background:linear-gradient(#D7A752,#B5677A,#1F5E6E)}
+.rail .tip{background:#D7A752;box-shadow:0 0 0 6px rgba(215,167,82,.22),0 0 18px rgba(215,167,82,.6)}
+.tier.pop{background:#FBF1EA;border-color:#D98872}.tier.pop b::after{background:#B5677A}
+.tier:hover{background:#EEF4F4}
+.feature li::before{background:#C9748C}.rate .body li::before{background:#5E9FB0}
+.w.soc{background:linear-gradient(160deg,#F6EEF0,#FFFDF9)}
+.contact h2 em,.contact .time,.line svg,.garden .time,.garden cite,.garden .ps a{color:#EBC3B4!important}
+.panel.dark{background:color-mix(in srgb,#1C2238 94%,transparent)}
+.garden,.garden-wrap,footer.site,.legal{background:#13172A!important}
+.garden::before{background:linear-gradient(transparent,#13172A)}
+.reel figure{border-width:3px;box-shadow:0 20px 40px -30px rgba(30,30,60,.5)}
+.reel figure:nth-child(3n+1){--r:-1deg}.reel figure:nth-child(3n+2){--r:.8deg}.reel figure:nth-child(3n){--r:0deg}
+
+/* refine pass: typography, rhythm, finish */
+body{font-weight:350}
+.hero h1{max-width:15ch;font-size:clamp(3rem,7vw,6.3rem);line-height:1.02;letter-spacing:-.015em}
+.hero .lede{max-width:46ch;color:#27303A;font-weight:400}
+.time,.eyebrow,.card-label,.step .n,.chips span,.w .tags span,.legal h4,.garden cite,.portrait figcaption{letter-spacing:.18em!important}
+.line small{letter-spacing:.18em!important;text-transform:uppercase}
+.btn{letter-spacing:.16em;border-radius:4px;padding:15px 22px}
+.btn-line{background:rgba(255,255,255,.55)}
+.panel{border-radius:20px;box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 30px 70px -48px rgba(28,30,58,.5);border:1px solid rgba(31,42,58,.08)}
+.head{margin-bottom:clamp(30px,4vw,52px)}
+.head h2,.proc-head h2{letter-spacing:-.012em}
+.head .lede,.proc-head .lede{color:#4A525C;font-weight:400}
+.feature,.tier,.logos a,form.interest,.w,.pillar{border-radius:12px}
+.feature{border-color:rgba(31,42,58,.09)}
+.feature .lede,.founder .copy p,.w p,.step p,.rate .sub,.tier span{color:#4F5761}
+.rate summary{padding-block:22px}
+.rate details{border-color:rgba(31,42,58,.1)}
+.step{opacity:.5}
+.step.lit{opacity:1}
+.pillar{padding:20px 22px}
+.pillar span{color:#4F5761}
+.portrait figcaption{text-wrap:balance;max-width:30ch}
+.founder blockquote{font-size:clamp(1.8rem,3.1vw,2.5rem)}
+.logos a{border-color:rgba(31,42,58,.08)}
+.reel{padding-bottom:clamp(10px,2vw,24px)}
+.reel figcaption{letter-spacing:.14em}
+section.sheet{padding-block:clamp(36px,6vw,84px)}
+.hero{padding-bottom:clamp(90px,14vh,150px)}
+@media (max-width:560px){.hero h1{font-size:clamp(2.7rem,12vw,3.4rem)}.hero .actions .btn{flex:1 1 100%;justify-content:center}}
+.reel img[src*="soc-song"]{object-position:top}
+.reel figcaption{max-width:calc(100% - 20px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+.reel a.rcard{display:block;flex:none;text-decoration:none;color:inherit}
+.reel a.rcard figure{transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+.reel a.rcard:hover figure,.reel a.rcard:focus-visible figure{transform:rotate(0) translateY(-8px) scale(1.03);box-shadow:0 30px 60px -30px rgba(30,30,60,.6)}
+.reel a.rcard figcaption::after{content:" \2197";opacity:0;transition:opacity .3s}
+.reel a.rcard:hover figcaption::after{opacity:1}
+.reel a.rcard:nth-child(3n+1) figure{--r:-1deg}.reel a.rcard:nth-child(3n+2) figure{--r:.8deg}.reel a.rcard:nth-child(3n) figure{--r:0deg}
+.reel img[src*="soc-parent"]{object-position:center 20%}
+.w.tht p:not(.eyebrow){color:#E6E0CF;opacity:.92}
+.w.hb{background:linear-gradient(160deg,#4A3A1E,#231B10);color:#F4EBD6;border-color:transparent}
+.w.hb .eyebrow{color:#E2C27A}.w.hb p:not(.eyebrow){color:#EDE3CC;opacity:.92}.w.hb .tags span{border-color:rgba(244,235,214,.45);color:#F4EBD6}.w.hb h3{color:#FFF6E2}
+.w.hb .shot{object-position:center}
+@media(min-width:761px) and (max-width:1099px){.w.hb{grid-column:1/-1}.w.hb .shot{height:240px}}
+@media(min-width:1100px){.work{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+.feature.dev{margin-top:14px;background:linear-gradient(160deg,#1F3B4D,#14202B);color:#EEF2F4;border-color:transparent}
+.feature.dev .eyebrow{color:#E2C27A}.feature.dev h3{color:#FFFFFF}.feature.dev .lede,.feature.dev li{color:#D7E0E5}
+.devbox{border:1px solid rgba(238,242,244,.25);border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:10px;align-self:start}
+.devbox .big{font-family:var(--serif,Georgia,serif);font-size:clamp(40px,6vw,56px);line-height:1;margin:0;color:#FFFFFF}
+.devbox .who{margin:0;font-size:.9rem;color:#D7E0E5}.devbox .who b{color:#FFFFFF}
+.devbox .btn{align-self:flex-start;background:#E2C27A;color:#14202B;border-color:#E2C27A}
+.logos .wordmark{align-self:stretch;height:100%;min-height:92px;background:rgba(255,255,255,.5);display:grid;place-items:center;min-height:56px;font-family:var(--serif,Georgia,serif);font-size:1.15rem;letter-spacing:.04em;color:var(--ink,#1F2A33);border:1px solid var(--line,#e5ddd2);border-radius:14px;padding:6px 10px;text-align:center}
+.partners .xp{margin:14px 0 0;font-size:.85rem;color:var(--ink-soft,#5a6470);letter-spacing:.02em}
+.logos .wm-sf{color:#0B5CAB;font-family:var(--sans,system-ui,sans-serif);font-weight:600;letter-spacing:0}.logos .wm-g{font-family:var(--sans,system-ui,sans-serif);font-weight:500;letter-spacing:0;color:#3c4043}
+.logos{grid-template-columns:repeat(4,minmax(0,1fr))!important}.logos .wm-g{grid-column:1/-1}@media(max-width:760px){.logos{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+.logos .wm-sf{font-size:clamp(1.5rem,2.4vw,2rem)!important;font-weight:700!important}.logos .wm-g{font-size:clamp(1.5rem,2.4vw,2rem)!important}
+.logos .gimg{grid-column:1/-1;display:grid;place-items:center;min-height:92px;background:rgba(255,255,255,.5);border:1px solid var(--line,#e5ddd2);border-radius:14px;padding:14px}.logos .gimg img{max-height:48px;width:auto}
+
+/* video clipping */
+.feature.clip{margin-top:14px;grid-template-columns:1fr;background:#FFFDF9}
+.reels{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:6px}
+.vclip{position:relative;aspect-ratio:9/16;border-radius:14px;overflow:hidden;background:linear-gradient(170deg,#1F3B4D,#0F1A24);color:#F4EFE6;display:flex;flex-direction:column;justify-content:space-between;padding:12px;box-shadow:0 18px 36px -24px rgba(20,30,50,.6)}
+.vclip:nth-child(2){background:linear-gradient(170deg,#5B3A4A,#22151C)}.vclip:nth-child(3){background:linear-gradient(170deg,#3E4A2E,#171C12)}.vclip:nth-child(4){background:linear-gradient(170deg,#6A4B24,#241A0E)}
+.vclip .len{align-self:flex-start;font:500 .62rem var(--body);letter-spacing:.14em;text-transform:uppercase;background:rgba(255,255,255,.16);padding:4px 8px;border-radius:999px}
+.vclip .cap{font-family:var(--display);font-size:clamp(1rem,1.6vw,1.25rem);line-height:1.15;text-align:center;text-shadow:0 2px 12px rgba(0,0,0,.6)}
+.vclip .cap b{background:#D7A752;color:#14202B;padding:0 4px;font-weight:500}
+.vclip .lab{font:500 .62rem var(--body);letter-spacing:.12em;text-transform:uppercase;opacity:.85}
+.cliptypes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 28px;margin:20px 0 0;padding:0;list-style:none}
+.feature .cliptypes li{display:block;font-size:.94rem;color:#4F5761}.feature .cliptypes li::before{display:inline-block;margin-right:10px;vertical-align:middle;transform:none}.cliptypes li b{color:var(--ink);font-weight:500}
+@media (max-width:760px){.reels{grid-template-columns:repeat(2,minmax(0,1fr))}.cliptypes{grid-template-columns:1fr}}
+
+.reels.sbp{grid-template-columns:repeat(3,minmax(0,1fr))}
+.vclip.real{margin:0;padding:0;background:#111}
+.vclip.real img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vclip.real figcaption{position:absolute;left:10px;bottom:10px;background:rgba(255,255,255,.92);color:#1E2433;border-radius:999px;padding:4px 10px;opacity:1}
+@media (max-width:760px){.reels.sbp{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.vclip.real figcaption{font-size:.48rem;letter-spacing:.06em;left:5px;bottom:5px;padding:3px 6px;white-space:nowrap}}
+.ex{display:grid;gap:8px;margin-top:4px}.ex-l{margin:0;font:400 .62rem var(--pixel);letter-spacing:.18em;text-transform:uppercase;color:var(--faint)}
+.ex-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.ex-g figure{margin:0;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:#fff}
+.ex-g img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.ex-g figcaption{padding:6px 9px;font-size:.78rem;color:var(--ink)}
+.ex-link{font-size:.85rem;color:var(--lagoon-ink)}
+a.vclip.real{text-decoration:none}a.vclip.real .lab{position:absolute;left:10px;bottom:10px;background:rgba(255,255,255,.92);color:#1E2433;border-radius:999px;padding:4px 10px;opacity:1;white-space:nowrap}
+.vclip .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:54px;height:54px;border-radius:50%;background:rgba(255,255,255,.9);color:#1E2433;display:grid;place-items:center;font-size:20px;padding-left:4px;box-shadow:0 8px 24px rgba(0,0,0,.35);transition:transform .3s}
+a.vclip.real:hover .play{transform:translate(-50%,-50%) scale(1.08)}
+@media (max-width:760px){a.vclip.real .lab{font-size:.48rem;left:5px;bottom:5px;padding:3px 6px}.vclip .play{width:38px;height:38px;font-size:14px}}
+/* launch-safe pass: consent, focus, contrast, legal */
+form.interest label.consent{flex-direction:row;align-items:flex-start;gap:10px;font:400 .9rem/1.5 var(--body);letter-spacing:0;text-transform:none;color:var(--ink)}
+form.interest label.consent input{accent-color:#1F5E6E;width:18px;height:18px;margin:2px 0 0;flex:none}
+form.interest label.consent a{color:#1F5E6E;text-decoration:underline;text-underline-offset:2px}
+form.interest input[type=text]:focus-visible,form.interest input[type=email]:focus-visible,form.interest input[type=tel]:focus-visible,form.interest textarea:focus-visible{box-shadow:0 0 0 2px #1F5E6E}
+form.interest input[type=checkbox]:focus-visible{outline:2px solid #1F5E6E;outline-offset:2px}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.feature .note,.card-label{color:#5F666E}
+.legal .wrap>div+div{border-top:1px solid rgba(255,255,255,.12);padding-top:22px}
+.legal .draft{font-weight:500;color:#FFE2A8!important}
+.legal a{color:#EBC3B4}
+.legal h3:focus{outline:none}
+footer nav a:focus-visible,.legal a:focus-visible,.legal .close:focus-visible{outline:2px solid #EBC3B4;outline-offset:3px}
+/* the sheets are light by design, so dark mode keeps light ink on them */
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#FFFDF9;--card:#FFFFFF;--ink:#1E2433;--muted:#5A6170;--faint:#5F666E;--lagoon:#1F5E6E;--lagoon-ink:#1F5E6E;--ocean-wash:#E6F5F9;--line:rgba(18,18,18,.1);--line-2:rgba(18,18,18,.22);color-scheme:light}
+  :root:not([data-theme="light"]) header.site:not(.night) .wordmark{filter:none}}
+:root[data-theme="dark"]{--paper:#FFFDF9;--card:#FFFFFF;--ink:#1E2433;--muted:#5A6170;--faint:#5F666E;--lagoon:#1F5E6E;--lagoon-ink:#1F5E6E;--ocean-wash:#E6F5F9;--line:rgba(18,18,18,.1);--line-2:rgba(18,18,18,.22);color-scheme:light}
+:root[data-theme="dark"] header.site:not(.night) .wordmark{filter:none}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <g id="i-arrow" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h17M14 6l6 6-6 6"/></g>
+  <g id="i-plus" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 4v16M4 12h16"/></g>
+<g id="l-compass" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></g><g id="l-clapper" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="9" width="17" height="11" rx="1.5"/><path d="M3.5 9l15.6-3.6.4 1.9M8 8l2.5 2.9M13 6.9l2.5 2.9"/></g><g id="l-gear" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8"/></g><g id="l-bulb" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 17.5h6M10 20.5h4M12 3.5a6 6 0 0 0-3.5 10.9c.6.5 1 1.3 1 2.1v1h5v-1c0-.8.4-1.6 1-2.1A6 6 0 0 0 12 3.5z"/></g><g id="l-phone" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.8" width="10" height="18.4" rx="2.2"/><path d="M11 18h2"/></g><g id="l-laptop" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="10" rx="1.2"/><path d="M2.5 18.5h19"/></g><g id="l-eye" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></g><g id="l-check" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12.3l2.7 2.7L16.2 9.4"/></g><g id="l-heart" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.2a4.3 4.3 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20z"/></g></defs></svg>
+<canvas id="sky" aria-hidden="true"></canvas>
+
+<header class="site">
+  <div class="wrap bar">
+    <a class="brand" href="#top" aria-label="Swazi Socials home"><img class="wordmark" src="img/logo-swazi.png" alt="Swazi Socials" width="1042" height="457"></a>
+    <nav class="main" aria-label="Main"><a href="#offers">Offers</a><a href="#process">How we work</a><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></nav>
+    <div class="right"><span class="clock" aria-label="Time of day on this page"><i id="clock-ic"></i><span id="clock">6:00 AM</span></span><a class="btn btn-solid" href="#contact">Let's talk</a></div>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="wrap">
+    <div class="glow" aria-hidden="true"></div>
+    <p class="time rv"><i></i>6:00 AM &middot; Strategy, content, video, events, websites</p>
+    <h1 class="rv">Growth systems, <em>built and run</em> for you.</h1>
+    <p class="lede rv">Swazi plans and runs the work behind growing brands: strategy, content, video, events and websites, kept in one documented system you can see.</p>
+    <div class="actions rv">
+      <a class="btn btn-solid" href="#contact" data-pick="i-consult">Book a consultation <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a class="btn btn-line" href="#offers">See what we build</a>
+    </div>
+    <div class="pillars rv">
+      <div class="pillar"><b><svg class="li sm" viewBox="0 0 24 24" aria-hidden="true"><use href="#l-compass"/></svg>Strategy</b><span>Every partnership begins with a plan rooted in your voice and goals.</span></div>
+      <div class="pillar"><b><svg class="li sm" viewBox="0 0 24 24" aria-hidden="true"><use href="#l-clapper"/></svg>Story</b><span>Content that feels human, relevant and true to your brand.</span></div>
+      <div class="pillar"><b><svg class="li sm" viewBox="0 0 24 24" aria-hidden="true"><use href="#l-gear"/></svg>Systems</b><span>Planning and coordination behind the work, so it keeps moving week to week.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sheet outer" id="offers">
+  <div class="panel rv">
+    <div class="head">
+      <div><p class="time"><i></i>9:00 AM &middot; What we build</p><h2>Ways to work <em>with us</em></h2></div>
+      <p class="lede">Start with a consultation, a single project, or a long-term partnership. Every engagement is scoped with you first and proposed in writing.</p>
+    </div>
+    <style>
+#strand,#alacarte{color:#2a2622}
+#strand{background:linear-gradient(180deg,#fbf6ee,#f4ebdd);border:1px solid #e6d9c4;border-radius:28px;padding:clamp(22px,4vw,44px);margin:0 0 28px;text-align:center}
+#strand .eyebrow,#alacarte .eyebrow{color:#a7773a}
+#strand h3{margin:6px 0 10px;font-size:clamp(30px,4.4vw,46px);line-height:1.1}
+#strand .lede{max-width:600px;margin:0 auto 22px;color:#5d554c}
+#strand .vid{position:relative;aspect-ratio:16/9;max-width:760px;margin:0 auto 26px;border-radius:20px;overflow:hidden;background:#1d2a36;box-shadow:0 18px 40px rgba(60,40,20,.18)}
+#strand .vid iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+#strand .vid a{position:absolute;right:12px;bottom:12px;background:rgba(255,255,255,.9);color:#1d2a36;font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px;text-decoration:none}
+#strand .card{max-width:520px;margin:0 auto;background:#fff;border:2px solid #d8b46a;border-radius:22px;padding:24px;box-shadow:0 10px 26px rgba(168,119,58,.14)}
+#strand .price{font-size:44px;line-height:1;margin:0 0 14px}
+#strand .price small{font-size:15px;color:#7a7066}
+#strand ul{list-style:none;margin:0 0 20px;padding:0;display:grid;gap:8px;text-align:left}
+#strand ul li{padding-left:24px;position:relative;line-height:1.45}
+#strand ul li::before{content:"✦";position:absolute;left:0;color:#d8b46a}
+#strand .btn{width:100%;justify-content:center}
+#strand .note{font-size:14px;color:#7a7066;margin:14px 0 0}
+#alacarte{margin:0 0 28px}
+#alacarte .hd{text-align:center;margin:0 auto 18px;max-width:600px}
+#alacarte h3{margin:6px 0 8px;font-size:clamp(28px,4vw,40px);line-height:1.1}
+#alacarte .hd p{color:#5d554c;margin:0}
+#alacarte ol{list-style:none;margin:0;padding:0;border:1px solid #e6d9c4;border-radius:22px;background:#fffdf9;overflow:hidden}
+#alacarte .r{display:grid;grid-template-columns:minmax(220px,1fr) 1.6fr;gap:6px 22px;padding:18px 22px;border-top:1px solid #efe5d6;align-items:start}
+#alacarte .r:first-child{border-top:0}
+#alacarte .rn{display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+#alacarte h4{margin:0;font-size:18px;line-height:1.3}
+#alacarte .r p{margin:0;color:#4d463f;font-size:15px;line-height:1.5}
+#alacarte .ex{display:block;margin-top:4px;font-size:13.5px;color:#8a7d6c}
+.st{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:2px 9px;border-radius:999px}
+.st-live{background:#d8b46a;color:#2a2622}.st-beta{background:#f1e6d3;color:#7a5a2c}.st-soon{border:1px dashed #c9b89c;color:#8a7d6c}
+#alacarte .foot{text-align:center;margin-top:18px}
+@media (max-width:720px){#alacarte .r{grid-template-columns:1fr;padding:16px}#strand{padding:20px 14px}#strand .card{padding:20px 16px}}
+</style><article id="strand">
+  <p class="eyebrow">Start here &middot; The Swazi Support Strand</p>
+  <h3>Your brand, led every week</h3>
+  <p class="lede">An assigned lead plans, researches and coordinates your brand with you, week after week.</p>
+  <div class="vid"><iframe src="https://drive.google.com/file/d/18v9yqBAYGzl7wTHLabwZe1K8tR-cIJlA/preview" title="The Swazi Support Strand explainer" allow="autoplay" loading="lazy" allowfullscreen></iframe><a href="https://drive.google.com/file/d/18v9yqBAYGzl7wTHLabwZe1K8tR-cIJlA/view" target="_blank" rel="noopener">Open video</a></div>
+  <div class="card">
+    <p class="price" style="font-size:22px;line-height:1.3">Pricing shared on your consult call</p>
+    <ul>
+      <li>Begins with one 90-minute Founder Mapping Session with Ashley</li>
+      <li>Then ongoing planning, research and coordination through your assigned Swazi lead</li>
+    </ul>
+    <a class="btn btn-solid" href="#contact" data-pick="i-strand">Request your Strand <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+    <p class="note">Production work is scoped separately. Requesting your Strand does not charge you.</p>
+  </div>
+</article>
+    <article id="alacarte">
+  <div class="hd"><p class="eyebrow">Add-ons</p><h3>Our services, à la carte</h3><p>Production services, added when you need them. Each one is scoped with you separately before any work starts. Tap + to see what each one includes.</p></div>
+  <style>/* expand */
+  
+  
+  .xp{border-top:1px solid #e6d9c4}
+  .xp:last-of-type{border-bottom:1px solid #e6d9c4}
+  .xp summary{list-style:none;display:flex;align-items:center;gap:14px;padding:16px 4px;cursor:pointer;font-size:18px}
+  .xp summary::-webkit-details-marker{display:none}
+  .xp .plus{flex:none;width:32px;height:32px;border-radius:50%;border:1.5px solid #a7773a;position:relative;transition:transform .25s}
+  .xp .plus::before,.xp .plus::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:1.5px;background:#a7773a;transform:translate(-50%,-50%)}
+  .xp .plus::after{transform:translate(-50%,-50%) rotate(90deg)}
+  .xp[open] .plus{transform:rotate(45deg);background:#f4ebdd}
+  .xp .xt{flex:1}
+  .xp .st{flex:none}
+  .xp summary:focus-visible{outline:2px solid #a7773a;outline-offset:2px;border-radius:8px}
+  .xb{padding:0 4px 20px 46px;color:#4d463f}
+  .xb p{margin:0 0 12px}
+  .xg{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px}
+  .xg figure{margin:0}
+  .xg img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:14px;display:block}
+  .xg figcaption{font-size:13px;color:#7a7066;margin-top:6px}
+  @media (max-width:560px){.xb{padding-left:4px}.xp summary{font-size:16px}}
+  @media (prefers-reduced-motion:reduce){.xp .plus{transition:none}}
+  </style><style>
+#alacarte .r{display:block;padding:0}
+#alacarte .xp{border:0}
+#alacarte summary,#alacarte .nx{display:grid;grid-template-columns:32px minmax(200px,1fr) 1.5fr;gap:6px 18px;align-items:start;padding:18px 22px;list-style:none;cursor:pointer}
+#alacarte .nx{cursor:default}
+#alacarte summary::-webkit-details-marker{display:none}
+#alacarte .plus{margin-top:2px}
+#alacarte .plus.off{border-color:transparent}
+#alacarte .plus.off::before,#alacarte .plus.off::after{display:none}
+#alacarte .rd{color:#4d463f;font-size:15px;line-height:1.5}
+#alacarte .xb{padding:0 22px 20px 72px}
+#alacarte .of{margin:0 0 12px;padding-left:18px;display:grid;gap:6px;color:#4d463f}#alacarte .cp{margin:0;font-size:14.5px;color:#5d554c;background:#f7efe2;border-radius:12px;padding:10px 14px}#alacarte .hint{font-size:13px;color:#8a7d6c;margin-top:8px}
+@media (max-width:720px){#alacarte summary,#alacarte .nx{grid-template-columns:32px 1fr;padding:16px}#alacarte .rd{grid-column:2}#alacarte .xb{padding:0 16px 18px 16px}}
+</style><ol>
+    <li class="r"><details class="xp"><summary><span class="plus" aria-hidden="true"></span><span class="rn"><span class="st st-live">Live</span><h4>Social media management</h4></span><span class="rd">Strategy, posting and scheduling across your platforms, on a calendar you can see.</span></summary><div class="xb"><ul class="of"><li>A monthly content plan across Instagram, Facebook, LinkedIn, YouTube and TikTok</li><li>Posts, captions and graphics made in your voice</li><li>Scheduling and publishing on a shared calendar</li><li>Your accounts connected to Shopify, so you can sell where Shopify supports it</li><li>A monthly look at how your posts performed</li><li>Comments and DMs stay with your team, so those conversations stay personal</li></ul><p class="cp"><b>Complete when:</b> the month’s posts are live on your calendar and you have your monthly review.</p></div></details></li>
+    <li class="r"><details class="xp"><summary><span class="plus" aria-hidden="true"></span><span class="rn"><span class="st st-live">Live</span><h4>Reels, graphics, carousels and clipping</h4></span><span class="rd">Short-form video, graphics and carousels, plus long-form video clipped into captioned shorts.</span></summary><div class="xb"><ul class="of"><li>Reels and short-form video for your brand</li><li>Graphics and carousels that teach, announce or sell</li><li>Clipping: your film, podcast, talk or livestream cut into vertical clips</li><li>Burned-in captions, cover frames and post copy for each clip</li><li>Sized for Instagram, TikTok, YouTube Shorts and LinkedIn, and scheduled if you want</li></ul><p class="cp"><b>Complete when:</b> every piece is approved by you and delivered ready to post.</p></div></details></li>
+    <li class="r"><details class="xp"><summary><span class="plus" aria-hidden="true"></span><span class="rn"><span class="st st-live">Live</span><h4>Event story coverage</h4></span><span class="rd">Flyers and promo before, story coverage on the day.</span></summary><div class="xb"><ul class="of"><li>Flyers, promo and print-ready event visuals before the day</li><li>Day-of coverage shot on the team’s phones, with a photographer when needed</li><li>Stories and posts that carry the moment while it’s happening</li><li>Event graphics managed for you</li></ul><p class="cp"><b>Complete when:</b> your promo is out before the event and your coverage is delivered after it.</p></div></details></li>
+    <li class="r"><details class="xp"><summary><span class="plus" aria-hidden="true"></span><span class="rn"><span class="st st-live">Live</span><h4>Website development</h4></span><span class="rd">Websites with real feeling, connected to the systems behind them.</span></summary><div class="xb"><ul class="of"><li>Design and build of your site, page by page</li><li>Copy and images shaped around your brand</li><li>Forms, booking and links connected so they actually work</li><li>Your domain connected and the site live</li></ul><p class="cp"><b>Complete when:</b> the site is live on your domain and every form, booking link and integration has been tested.</p></div></details></li>
+    <li class="r"><details class="xp"><summary><span class="plus" aria-hidden="true"></span><span class="rn"><span class="st st-beta">Beta</span><h4>Newsletters and email marketing</h4></span><span class="rd">Regular newsletters and email that keep your people close.</span></summary><div class="xb"><ul class="of"><li>A newsletter rhythm that fits your brand</li><li>Writing and design for each issue</li><li>Sending set up on your email list</li></ul><p class="cp"><b>Complete when:</b> each issue is approved by you and sent to your list.</p></div></details></li>
+    <li class="r"><details class="xp"><summary><span class="plus" aria-hidden="true"></span><span class="rn"><span class="st st-beta">Beta</span><h4>Long-form and series creation</h4></span><span class="rd">Episodes and series built to keep going.</span></summary><div class="xb"><ul class="of"><li>A series plan: theme, episodes and schedule</li><li>Scripts and outlines for each episode</li><li>Production support from planning through delivery</li></ul><p class="cp"><b>Complete when:</b> each episode is finished, approved and ready to publish.</p></div></details></li>
+    <li class="r"><details class="xp"><summary><span class="plus" aria-hidden="true"></span><span class="rn"><span class="st st-beta">Beta</span><h4>Strategy and brand-offer planning</h4></span><span class="rd">Your brand, offers and next moves, mapped and written down.</span></summary><div class="xb"><ul class="of"><li>A clear picture of your brand and who it serves</li><li>Your offers mapped, named and organized</li><li>Next moves written down in a plan you can follow</li></ul><p class="cp"><b>Complete when:</b> you have a written plan for your brand and offers that you have reviewed.</p></div></details></li>
+    <li class="r"><div class="nx"><span class="plus off" aria-hidden="true"></span><span class="rn"><span class="st st-soon">Coming soon</span><h4>Ad campaigns, SEO, blogs and website care</h4></span><span class="rd">Not available yet.</span></div></li>
+    <li class="r"><div class="nx"><span class="plus off" aria-hidden="true"></span><span class="rn"><span class="st st-soon">Coming soon</span><h4>Apps, software and extensions</h4></span><span class="rd">Not available yet. Planned with Lignova.</span></div></li>
+  </ol>
+  <div class="foot"><a class="btn" href="#contact">Ask about an add-on <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"></use></svg></a></div>
+</article>
+    
+  </div>
+</section>
+
+<section class="sheet outer" id="process">
+  <div class="panel rv proc">
+    <div class="proc-head">
+      <p class="time pm"><i></i>12:00 PM &middot; How we work</p><h2>Every post moves through the <em>same six steps</em></h2>
+      <p class="lede">Nothing goes live until you have seen it. The same assembly line runs for every brand we manage, so quality stays steady.</p>
+      <p class="proc-count" aria-hidden="true"><span id="stepnow">01</span> / 06</p>
+    </div>
+    <div class="timeline" id="timeline">
+      <div class="rail" aria-hidden="true"><i class="fill"></i><i class="tip"></i></div>
+      <div class="steps" aria-label="Our six-step process">
+        <div class="step"><svg class="li" viewBox="0 0 24 24" aria-hidden="true"><use href="#l-bulb"/></svg><span class="n">01</span><b>Idea</b><p>Themes and campaigns planned from your goals.</p></div>
+        <div class="step"><svg class="li" viewBox="0 0 24 24" aria-hidden="true"><use href="#l-phone"/></svg><span class="n">02</span><b>Capture</b><p>Your media, or a shoot day with our crew.</p></div>
+        <div class="step"><svg class="li" viewBox="0 0 24 24" aria-hidden="true"><use href="#l-laptop"/></svg><span class="n">03</span><b>Create</b><p>Edits, graphics and captions made for each platform.</p></div>
+        <div class="step"><svg class="li" viewBox="0 0 24 24" aria-hidden="true"><use href="#l-eye"/></svg><span class="n">04</span><b>Review</b><p>Drafts come to you by email for review.</p></div>
+        <div class="step"><svg class="li" viewBox="0 0 24 24" aria-hidden="true"><use href="#l-check"/></svg><span class="n">05</span><b>Approve</b><p>You sign off, or ask for changes, with a reply.</p></div>
+        <div class="step"><svg class="li" viewBox="0 0 24 24" aria-hidden="true"><use href="#l-heart"/></svg><span class="n">06</span><b>Publish</b><p>Scheduled, posted and tracked month over month.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sheet outer" id="work">
+  <div class="panel rv">
+    <div class="head">
+      <div><p class="time pm"><i></i>3:00 PM &middot; Selected work</p><h2>Some of our clients <em>and partners</em></h2></div>
+      <p class="lede">We create digital experiences people remember.</p>
+    </div>
+    <div class="partners">
+      <p class="eyebrow">Clients and partners</p>
+      <div class="logos">
+        <a href="https://www.paff.org/" target="_blank" rel="noopener"><img src="img/logo-paff.png" alt="Pan African Film and Arts Festival"></a>
+        <a href="https://www.fxnetworks.com/" target="_blank" rel="noopener"><img src="img/logo-fx.png" alt="FX Networks"></a>
+        <a href="https://www.arise.energy/" target="_blank" rel="noopener"><img src="img/logo-arise.png" alt="Arise Wellness"></a>
+        <span class="wordmark wm-sf">Salesforce</span>
+        <span class="wm-g gimg"><img src="img/logo-google.png" alt="Google"></span>
+      </div>
+    <div class="lignova">
+  <style>.lignova{margin-top:26px;border:1px solid #e6d9c4;border-radius:22px;background:linear-gradient(135deg,#1d2a36,#2c3b4a);color:#f5efe4;padding:clamp(20px,3.5vw,34px);display:grid;grid-template-columns:1.3fr 1fr;gap:20px;align-items:center}.lignova .eyebrow{color:#d8b46a;margin:0 0 6px}.lignova h3{margin:0 0 10px;font-size:clamp(26px,3.6vw,36px);line-height:1.1;color:#fff}.lignova p{margin:0 0 10px;color:#d9d1c4;line-height:1.55}.lignova .st{display:inline-block;margin-bottom:10px}.lignova ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}.lignova li{padding-left:22px;position:relative;color:#efe7da}.lignova li::before{content:"✦";position:absolute;left:0;color:#d8b46a}.lignova .btn{margin-top:14px;border-color:#d8b46a;color:#fff}@media (max-width:720px){.lignova{grid-template-columns:1fr}}</style><style>.lignova .lv{grid-column:1/-1;border-radius:18px;overflow:hidden;aspect-ratio:16/9;background:#141d26;box-shadow:0 18px 40px rgba(0,0,0,.3)}.lignova .lv video{width:100%;height:100%;display:block;object-fit:cover}</style>
+  <div class="lv"><video controls playsinline preload="metadata" poster="media/swazi-lignova-poster.jpg" aria-label="Swazi Socials and Lignova: apps, software and extensions"><source src="media/swazi-lignova.mp4" type="video/mp4"></video></div>
+  <div>
+    <p class="eyebrow">For larger, more complex projects</p>
+    <h3>Swazi Socials &times; Lignova</h3>
+    <span class="st st-soon" style="color:#e9dcc6;border-color:rgba(233,220,198,.5)">Coming soon</span>
+    <p>For builds that go beyond content and websites, we are preparing to work with Lignova, a technical firm.</p>
+    <a class="btn" href="#contact" data-pick="i-soft">Ask about a larger project <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"></use></svg></a>
+  </div>
+  <ul>
+    <li>Apps and software for your business</li>
+    <li>Browser extensions and internal tools</li>
+    <li>Projects scoped in stages, in writing, before anything starts</li>
+  </ul>
+</div>
+</div>
+    
+
+  </div>
+</section>
+
+<section class="sheet outer" id="about">
+  <div class="panel rv founder">
+    <figure class="portrait"><img src="img/ashley-portrait.webp" alt="Portrait of Ashley Dawkins, founder of Swazi Socials" width="760" height="760"><figcaption>Ashley Dawkins &middot; Founder &amp; Lead Project Manager</figcaption></figure>
+    <div class="copy">
+      <p class="time eve"><i></i>5:00 PM &middot; Our founder</p>
+      <blockquote>I don't believe in selling dreams. I believe in pursuing them.</blockquote>
+      <p>Community is one of my most important pillars. I started Swazi to help people and organizations share what they contribute, and to build the spaces and systems that strengthen everyone around them.</p>
+      <p>I was always the digital girl: building computers in elementary school, designing, building websites, and setting up accounts for my elders. Today that means organizing the systems, people and environments a brand needs to grow.</p>
+      <p>My biggest ask from any partner is communication. We do the practical steps first, then enjoy the beauty of the vision.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sheet outer" id="contact">
+  <div class="panel dark rv contact">
+    <div class="intro">
+      <p class="time eve"><i></i>7:00 PM &middot; Contact</p>
+      <h2>Let's build something <em>beautiful.</em></h2>
+      <p class="lede">Tell us about your brand and what you are interested in. We read every note and reach out about next steps and openings. ✨</p>
+      <div class="lines">
+        <div class="line"><small>Call or text</small><b id="ph">(562) 514-3339</b><button class="copybtn" data-copy="ph">Copy</button></div>
+        <div class="line"><small>LinkedIn</small><a class="b" href="https://www.linkedin.com/company/143007355/" target="_blank" rel="noopener">Swazi Socials</a><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><use href="#i-arrow"/></svg></div>
+      </div>
+    </div>
+    <form class='interest' id='interest' method='POST' name='interest' novalidate>
+      <input type="hidden" name="form-name" value="interest">
+      <label class="hp" aria-hidden="true">Leave empty<input type="text" name="company_url" id="f-hp" tabindex="-1" autocomplete="off"></label>
+      <label for="f-name">Your name<input type="text" id="f-name" name="name" autocomplete="name" required></label>
+      <label for="f-brand">Brand or business<input type="text" id="f-brand" name="brand" autocomplete="organization"></label>
+      <label for="f-email">Email<input type="email" id="f-email" name="email" autocomplete="email" required></label>
+      <label for="f-phone">Phone (optional)<input type="tel" id="f-phone" name="phone" autocomplete="tel"></label>
+      <div class="full dd-wrap"><span class="dd-label" id="dd-lab">I'm interested in</span>
+        <details class="dd" id="dd">
+          <summary aria-labelledby="dd-lab"><span id="dd-sum">Choose one or more</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="dd-list">
+            <label><input type="checkbox" name="interest" value="Swazi Support Strand" id="i-strand">Swazi Support Strand</label>
+            <label><input type="checkbox" name="interest" value="Consultation" id="i-consult">Consultation</label>
+            <label><input type="checkbox" name="interest" value="Social Media Management" id="i-smm">Social media management</label>
+            <label><input type="checkbox" name="interest" value="Reels Graphics Carousels Clipping" id="i-clip">Reels, graphics, carousels and clipping</label>
+            <label><input type="checkbox" name="interest" value="Event Story Coverage" id="i-event">Event story coverage</label>
+            <label><input type="checkbox" name="interest" value="Website Development" id="i-web">Website development</label>
+            <label><input type="checkbox" name="interest" value="Newsletters and Email" id="i-news">Newsletters and email marketing</label>
+            <label><input type="checkbox" name="interest" value="Long-form and Series" id="i-video">Long-form and series creation</label>
+            <label><input type="checkbox" name="interest" value="Strategy and Brand-Offer Planning" id="i-strat">Strategy and brand-offer planning</label>
+            <label><input type="checkbox" name="interest" value="Larger Projects Apps Software" id="i-soft">Larger projects: apps and software (coming soon)</label>
+            <label><input type="checkbox" name="interest" value="Waitlist" id="i-wait">Add me to the waitlist</label>
+          </div>
+        </details>
+      </div>
+      <label class="full" for="f-msg">Tell us about your brand<textarea id="f-msg" name="message" placeholder="What you do, where you want to grow, and any dates we should know"></textarea></label>
+      <label class="full consent" for="f-consent"><input type="checkbox" id="f-consent" name="consent" value="yes">I agree that Swazi Socials may use these details to reply to me, as described in the <a href="#privacy" data-legal>Privacy Policy</a>.</label>
+      <div class="row"><button class="btn btn-solid" type="submit" id="f-send" disabled>Send my interest <svg viewBox="0 0 24 24" aria-hidden="true"><use href="#i-arrow"/></svg></button><p class="msg" id="f-out" role="status"></p></div>
+    </form>
+  </div>
+</section>
+
+<section class="garden" id="garden" aria-label="Closing">
+  <canvas id="flowers" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <p class="time eve"><i></i>9:00 PM &middot; Goodnight</p>
+    <blockquote class="quote">&ldquo;The secret of life is to have no fear; it's the only way to function.&rdquo;<cite>Kwame Ture</cite></blockquote>
+    <p class="ps"><b>P.S.</b>Like this website? We can make one for you too.</p>
+  </div>
+</section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <img class="wordmark" src="img/logo-swazi.png" alt="Swazi Socials" width="1042" height="457"><span class="tag">Digital storytelling. Thoughtful strategy. Stories that move.</span>
+    <span>&copy; 2026 Swazi Socials &middot; Los Angeles</span>
+    <div class="fgroups">
+      <nav aria-label="Work with us"><h4>Work with us</h4><a href='/start'>Find your starting point</a><a href="#contact">Consultation</a><a href='/partnerships'>Institutional Partnerships</a><a href="#alacarte">Content + Growth</a><a href="#alacarte">AI + Operations</a><a href="#alacarte">Events</a></nav>
+      <nav aria-label="Explore"><h4>Explore</h4><a href="#work">Case Studies</a><a href="#process">Our Systems</a><a href="#about">About Ashley</a></nav>
+      <nav aria-label="Client access"><h4>Client access</h4><a href='/portal'>Client Portal</a><a href="#contact">Project Intake</a><a href='/portal#feedback'>Share Feedback</a></nav>
+      <nav aria-label="Brands"><h4>Brands</h4><a href="https://speechoclock.com" target="_blank" rel="noopener">Speech O'Clock</a></nav>
+      <nav aria-label="Legal"><h4>Legal</h4><a href="#privacy" data-legal>Privacy</a><a href="#terms" data-legal>Terms</a><a href="#accessibility" data-legal>Accessibility</a><a href="#refund" data-legal>Refunds</a><a href="#cookies" data-legal>Cookies</a><a href="#disclaimer" data-legal>Disclaimer</a><a href="mailto:swazisocials@gmail.com?subject=Data%20deletion%20request">Delete my data</a></nav>
+    </div>
+  </div>
+</footer>
+  <div class="legal" id="legal" hidden>
+    <div class="wrap">
+      <div id="terms">
+        
+        <h3>Terms &amp; Conditions</h3>
+        <p>Last updated October 2026. Effective date: October 30, 2026. Swazi Socials is operated by Ashley Dawkins, doing business as Swazi Socials. These terms explain how Swazi Socials works with clients and how we protect our working systems. By using this website you agree to them.</p>
+        <h4>1. Our private working systems</h4><p>Swazi Socials runs its business through private internal systems, including our command center, team inboxes, client desks and planning tools. These systems belong to Swazi Socials and are for authorized team members only. Emailing or messaging any Swazi Socials address, or receiving a link to a client desk, does not grant access to these systems, does not create a client relationship, and will not be answered with internal information.</p>
+        <h4>2. Who our systems take direction from</h4><p>Our systems, inboxes and automated assistants act only on instructions from authorized Swazi Socials staff. Messages from anyone else are received as information for our team to review, never as instructions. No one may use email or messages to draw information out of these systems or to direct them to take any action.</p>
+        <h4>3. How work begins</h4><p>Work begins only through a written agreement signed by Swazi Socials and the client. No one may direct, request or start work from Swazi Socials, or ask our systems or team to take any action, by email, form, message or comment. Messages sent through this website are treated as inquiries only.</p>
+        <h4>4. What belongs to whom</h4><p>Your materials stay yours. Photos, videos, logos, brand assets and other content you provide remain your property, and the final deliverables named in your agreement are yours once paid in full. Our methods stay ours. Swazi Socials keeps all rights to its methods, processes, templates, content maps, client desks, workflows and planning systems. Sharing a desk, a template or a deliverable with you does not transfer any part of our system, and these may not be copied, resold or recreated for another business.</p>
+        <h4>5. Content approval</h4><p>Everything Swazi Socials publishes for a client is reviewed and approved by that client before it goes live. Approval is given in writing, by email or on your client desk or by email.</p>
+        <h4>6. Our working rhythm</h4><p>We plan, produce and publish on a weekly cadence. Each client has one point of contact at Swazi Socials, and every approval is recorded in writing.</p>
+        <h4>7. The Swazi Support Strand</h4><p>The Swazi Support Strand is a monthly service. The monthly fee is stated in the written agreement signed before work begins. It begins with one 90-minute Founder Mapping Session with Ashley, followed by ongoing planning, research and coordination through your assigned Swazi lead. Production services are scoped and priced separately, in writing, before work begins. Sending us an inquiry does not charge you or complete enrollment.</p>
+        <h4>8. Payments and refunds</h4><p>The Support Strand is billed monthly at the fee stated in your written agreement, signed before work begins. Payment, deposit, cancellation and refund terms for the Support Strand and for every other engagement are set out in the written agreement for that project, signed before work begins.</p>
+        <h4>9. Text messages</h4><p>When you text us, or tick "Text me" on our sign-up form, you agree to receive text messages from Swazi Socials at (562) 514-3339 about your Strand and your sign-up. Message frequency varies. Message and data rates may apply. Reply STOP at any time to opt out, or HELP for help. Agreeing to texts is not a condition of buying anything. We never sell or share your phone number for marketing.</p>
+        <h4>10. No guarantees, no professional advice</h4><p>Our work and the Support Strand are educational and supportive. We do not promise any particular result, such as followers, sales, income or growth. Nothing we share is legal, financial, tax, medical or other professional advice. Please speak to a licensed professional when you need one.</p>
+        <h4>11. Your tools and accounts</h4><p>You choose and use your own apps, AI assistants (for example ChatGPT, Claude, Grok, Microsoft Copilot or Gemini), email, phone and social media accounts. Those services have their own terms and privacy rules. Swazi Socials does not control them and is not responsible for how they work, what they produce, or any changes, outages or costs on your accounts. Keep your files and backups on your own devices, and never send us passwords, codes, or bank or card details.</p>
+        <h4>12. Release and limit of liability</h4><p>To the fullest extent the law allows, you release Ashley Dawkins, Swazi Socials, its team members and partners from claims, losses or damages connected to your taking part in the Support Strand, and you agree not to bring a lawsuit against them over it. Swazi Socials is not liable for indirect, incidental or consequential damages, and its total liability for anything related to the Support Strand is limited to the amount you paid for it. Nothing in these terms limits liability that cannot be limited by law, such as harm caused on purpose or by gross negligence.</p>
+        <h4>13. Ending</h4><p>You can stop the Support Strand at any time by replying "stop" or "pause". We may end the Support Strand, or your place in it, at any time. If something goes wrong, please tell us first by replying to your Strand email so we can try to resolve it together in good faith.</p>
+        <h4>14. Governing law and contact</h4><p>These terms are governed by the laws of the State of California. Questions about these terms: call or text (562) 514-3339 or email swazisocials@gmail.com.</p>
+      </div>
+      <div id="privacy">
+        
+        <h3>Privacy Policy</h3>
+        <p>Effective date: October 25, 2026. This policy covers the Swazi Socials website, operated by Ashley Dawkins, doing business as Swazi Socials.</p>
+        <h4>What we collect</h4><p>Only the details you choose to give us. Through our interest form: your name and email, and, if you add them, your business name, phone number, the services you are interested in and your message. We also record that you agreed to this policy when you sent the form.</p>
+        <h4>Support Strand sign-up, texts and payments</h4><p>When you join the Support Strand, our sign-up form (hosted by Jotform) collects your name, email, phone number if you add it, your brand and work details, the links and social handles you share, your communication choices and your signature. Texts are sent and received through Google Voice at (562) 514-3339. Payments are handled by PayPal, so we never see your card or bank details. We use this information only to run your Strand and stay in touch, and we share it only with the services that make this possible (Jotform, Google, PayPal and our website host, Netlify). Reply STOP to any text to stop texts.</p>
+        <h4>How we use it</h4><p>To reply to you, to schedule time with you, and, if you asked to join our list, to send you updates. Every marketing email we send includes an unsubscribe link, and you can unsubscribe at any time.</p>
+        <h4>What we never collect or do</h4><p>We never collect payment card numbers, passwords or government ID numbers through this website. We do not sell, rent or trade your information.</p>
+        <h4>Services this page uses</h4><p>Fonts on this page load from Google Fonts, which receives your browser's IP address to deliver them. Form entries are delivered to Swazi Socials through our website host, Netlify, and are read only by authorized Swazi Socials staff.</p>
+        <h4>Children</h4><p>This website is for adults and businesses. We do not knowingly collect information from children under 13. If you believe a child has sent us information, contact us and we will delete it.</p>
+        <h4>Deleting your information</h4><p>To be taken off our list or have your information deleted, call or text (562) 514-3339 or email <a href="mailto:swazisocials@gmail.com?subject=Data%20deletion%20request">swazisocials@gmail.com</a> and we will remove it. California residents may also ask what information we hold about them.</p>
+      </div>
+      <div id="refund">
+        
+        <h3>Refund Policy</h3>
+        <p>Effective date: October 30, 2026. Prices on this website are starting rates. Payment, deposit, cancellation and refund terms for each engagement are set out in the written agreement signed before work begins. Support Strand (monthly fee stated in your written agreement): payment, deposit, cancellation and refund terms are set out in your written agreement. Questions: call or text (562) 514-3339 or email swazisocials@gmail.com.</p>
+      </div>
+      <div id="cookies">
+        
+        <h3>Cookie Policy</h3>
+        <p>Effective date: October 25, 2026. This website does not use advertising cookies, analytics or tracking pixels, so there is nothing to accept or decline. Fonts load from Google Fonts, which does not set cookies for this purpose. If we add analytics later, we will update this policy and ask for your consent first.</p>
+      </div>
+      <div id="accessibility">
+        <h3>Accessibility</h3>
+        <p>We want everyone to be able to use this website. It is built with readable text, keyboard-friendly links and forms, labeled images, and respect for reduced-motion settings. If anything here is hard to use, call or text (562) 514-3339 or email swazisocials@gmail.com and we will help and fix it.</p>
+      </div>
+      <div id="disclaimer">
+        <h3>Legal disclaimer</h3>
+        <p>The information on this website is for general purposes only. Results depend on each business and are not guaranteed. Pricing is set in a written proposal and agreement. Brand names shown belong to their owners and appear to describe past work.</p>
+      </div>
+      <button class="close" type="button" id="lg-close">Close</button>
+    </div>
+  </div>
+
+
+<script>
+document.querySelectorAll("[data-copy]").forEach(b=>b.addEventListener("click",async()=>{
+  const el=document.getElementById(b.dataset.copy);const t=el.textContent.trim();
+  try{await navigator.clipboard.writeText(t);b.textContent="Copied"}
+  catch(e){const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent="Selected"}
+  setTimeout(()=>b.textContent="Copy",1800);
+}));
+(()=>{
+  const dd=document.getElementById("dd"),sum=document.getElementById("dd-sum");
+  const upd=()=>{const v=[...dd.querySelectorAll("input:checked")].map(i=>i.parentElement.textContent.trim());sum.textContent=v.length?v.join(", "):"Choose one or more"};
+  dd.addEventListener("change",upd);
+  document.addEventListener("click",e=>{if(dd.open&&!dd.contains(e.target))dd.open=false});
+  document.getElementById("interest").addEventListener("reset",()=>setTimeout(upd,0));
+})();
+(()=>{
+  const form=document.getElementById("interest"),out=document.getElementById("f-out"),btn=document.getElementById("f-send"),ok=document.getElementById("f-consent");
+  const gate=()=>{btn.disabled=!ok.checked};ok.addEventListener("change",gate);form.addEventListener("reset",()=>setTimeout(gate,0));gate();
+  const dbP=(window.claude&&window.claude.use)?window.claude.use("db"):Promise.resolve(null);
+  form.addEventListener("submit",async e=>{
+    e.preventDefault();out.className="msg";out.textContent="";
+    if(document.getElementById("f-hp").value)return;
+    if(!ok.checked){out.className="msg err";out.textContent="Please tick the box to agree to the Privacy Policy before sending.";return}
+    const name=document.getElementById("f-name").value.trim(),email=document.getElementById("f-email").value.trim();
+    if(!name||!/^\S+@\S+\.\S+$/.test(email)){out.className="msg err";out.textContent="Add your name and a valid email so we can reach you.";return}
+    const doc={name,email,brand:document.getElementById("f-brand").value.trim(),phone:document.getElementById("f-phone").value.trim(),
+      interests:[...form.querySelectorAll("input[name=interest]:checked")].map(i=>i.value),
+      message:document.getElementById("f-msg").value.trim(),consent:true,status:"new",createdAt:new Date().toISOString()};
+    btn.disabled=true;
+    try{const db=await dbP;if(db){await db.collection("inquiries").add(doc)}else{const fd=new FormData(form);fd.set("form-name","interest");const r=await fetch("/",{method:"POST",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:new URLSearchParams(fd).toString()});if(!r.ok)throw 0}form.reset();out.textContent="Thank you, "+name.split(" ")[0]+". Your note is in. We will be in touch soon.";}
+    catch(err){out.className="msg err";out.textContent="This preview can't send your note yet. Please call or text (562) 514-3339.";}
+    finally{gate()}
+  });
+})();
+</script>
+<script>
+(()=>{const legal=document.getElementById("legal");let opener=null;
+function openLegal(id,from){const t=document.getElementById(id);if(!t||!legal.contains(t))return;legal.hidden=false;if(from)opener=from;requestAnimationFrame(()=>{t.scrollIntoView({block:"start"});const h=t.querySelector("h3")||t;h.setAttribute("tabindex","-1");h.focus({preventScroll:true})})}
+function closeLegal(){legal.hidden=true;try{history.replaceState(null,"",location.pathname+location.search)}catch(_){};if(opener&&document.contains(opener)){opener.focus({preventScroll:true});opener.scrollIntoView({block:"center"});opener=null}else document.querySelector("footer.site").scrollIntoView({block:"end"})}
+document.querySelectorAll("a[data-legal]").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();openLegal(a.getAttribute("href").slice(1),a);try{history.replaceState(null,"",a.getAttribute("href"))}catch(_){}}));
+document.getElementById("lg-close").addEventListener("click",closeLegal);
+addEventListener("keydown",e=>{if(e.key==="Escape"&&!legal.hidden)closeLegal()});
+addEventListener("hashchange",()=>openLegal(location.hash.slice(1)));
+if(location.hash)openLegal(location.hash.slice(1));})();
+</script>
+<script>
+/* 8-bit icons: each canvas[data-ic] is drawn small and crisp */
+(()=>{
+  const S=16,ICONS={
+    compass(c){c.fillStyle="#006E87";c.beginPath();c.arc(8,8,7,0,6.3);c.fill();c.fillStyle="#F8F6F2";c.beginPath();c.arc(8,8,5.2,0,6.3);c.fill();c.fillStyle="#F3A38A";c.beginPath();c.moveTo(8,2.5);c.lineTo(10,8);c.lineTo(6,8);c.fill();c.fillStyle="#006E87";c.beginPath();c.moveTo(8,13.5);c.lineTo(10,8);c.lineTo(6,8);c.fill()},
+    clapper(c){c.fillStyle="#111";c.fillRect(2,6,12,8);c.fillStyle="#111";c.save();c.translate(2,5);c.rotate(-.25);c.fillRect(0,-3,12,3);c.fillStyle="#F8F6F2";for(let i=1;i<12;i+=4)c.fillRect(i,-3,2,3);c.restore();c.fillStyle="#E8B756";c.fillRect(4,8,8,1);c.fillStyle="#A6D9E8";c.fillRect(4,10,6,1)},
+    gear(c){c.fillStyle="#006E87";for(let i=0;i<8;i++){c.save();c.translate(8,8);c.rotate(i/8*6.283);c.fillRect(-1.5,-7.5,3,3);c.restore()}c.beginPath();c.arc(8,8,5.2,0,6.3);c.fill();c.fillStyle="#A6D9E8";c.beginPath();c.arc(8,8,2.2,0,6.3);c.fill()},
+    bulb(c){c.fillStyle="#E8B756";c.beginPath();c.arc(8,6.5,5,0,6.3);c.fill();c.fillRect(5.5,9,5,3);c.fillStyle="#FFF4C2";c.fillRect(6,4,2,2);c.fillStyle="#8A8F90";c.fillRect(5.5,12,5,1.5);c.fillRect(6.5,14,3,1)},
+    phone(c){c.fillStyle="#111";c.fillRect(4,1,8,14);c.fillStyle="#A6D9E8";c.fillRect(5,3,6,9);c.fillStyle="#F3A38A";c.fillRect(7,6,2,2);c.fillStyle="#F8F6F2";c.fillRect(7,13,2,1)},
+    laptop(c){c.fillStyle="#111";c.fillRect(2,3,12,8);c.fillStyle="#A6D9E8";c.fillRect(3,4,10,6);c.fillStyle="#E58BB0";c.fillRect(4,5,4,2);c.fillStyle="#E8B756";c.fillRect(4,8,7,1);c.fillStyle="#5C6264";c.fillRect(0,11,16,2)},
+    eye(c){c.fillStyle="#111";c.beginPath();c.ellipse(8,8,7.5,4.5,0,0,6.3);c.fill();c.fillStyle="#F8F6F2";c.beginPath();c.ellipse(8,8,6,3.3,0,0,6.3);c.fill();c.fillStyle="#006E87";c.beginPath();c.arc(8,8,2.6,0,6.3);c.fill();c.fillStyle="#F8F6F2";c.fillRect(8,6,1,1)},
+    check(c){c.fillStyle="#5CC46A";c.beginPath();c.arc(8,8,7.5,0,6.3);c.fill();c.strokeStyle="#F8F6F2";c.lineWidth=2.2;c.beginPath();c.moveTo(4.5,8.5);c.lineTo(7,11);c.lineTo(11.5,5.5);c.stroke()},
+    heart(c){c.fillStyle="#E58BB0";c.beginPath();c.moveTo(8,14);c.bezierCurveTo(-1,8,2,1,8,5);c.bezierCurveTo(14,1,17,8,8,14);c.fill();c.fillStyle="#FFF0F6";c.fillRect(4,5,2,2)}
+  };
+  const tmp=document.createElement("canvas");tmp.width=tmp.height=S;const tc=tmp.getContext("2d",{willReadFrequently:true});
+  document.querySelectorAll("canvas[data-ic]").forEach(el=>{const f=ICONS[el.dataset.ic];if(!f)return;tc.clearRect(0,0,S,S);f(tc);
+    const im=tc.getImageData(0,0,S,S),d=im.data;for(let i=3;i<d.length;i+=4)d[i]=d[i]>110?255:0;el.width=el.height=S;el.getContext("2d").putImageData(im,0,0)});
+})();
+</script>
+<script>
+/* One day with Swazi, grain edition: a soft painted sky behind the page, warm dawn to dusky night, with film grain laid over everything */
+(()=>{
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const cv=document.getElementById("sky"),cx=cv.getContext("2d");
+  const clock=document.getElementById("clock"),clockIc=document.getElementById("clock-ic");
+  const hex=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16)),mix=(a,b,f)=>[0,1,2].map(i=>a[i]+(b[i]-a[i])*f),rgb=(c,a=1)=>`rgba(${c[0]|0},${c[1]|0},${c[2]|0},${a})`;
+  const K=[[0,["#A6C4D6","#F3C8C8","#F8E2C2"],"#FFF2D0",["#B2ACC8","#8E8DB1"],["#A4CCD4","#6FA4B2"]],
+           [0.3,["#8FC2DC","#C2E3EC","#ECF4F4"],"#FFFBEB",["#A4C6B3","#7EAB95"],["#86C5CF","#4D94A2"]],
+           [0.6,["#9AB4CA","#F0D0A6","#F6BC85"],"#FFE4A9",["#C8A094","#A67D7D"],["#9CB4B4","#5E7A86"]],
+           [0.82,["#44376A","#C76A7F","#ECA170"],"#FABA83",["#72507D","#4C345A"],["#8F5675","#34294F"]],
+           [1,["#0E121E","#191D32","#272740"],"#EEE8D7",["#1E2036","#141627"],["#181C2E","#0C0E1C"]]];
+  function pal(t){t=Math.max(0,Math.min(1,t));let i=0;while(i<K.length-2&&t>K[i+1][0])i++;const A=K[i],Z=K[i+1],f=(t-A[0])/(Z[0]-A[0]);
+    return{sky:[0,1,2].map(j=>mix(hex(A[1][j]),hex(Z[1][j]),f)),sun:mix(hex(A[2]),hex(Z[2]),f),hills:[0,1].map(j=>mix(hex(A[3][j]),hex(Z[3][j]),f)),sea:[0,1].map(j=>mix(hex(A[4][j]),hex(Z[4][j]),f))}}
+  const ANCH=[["top",6],["offers",9],["process",12],["work",15],["about",17],["contact",19],["garden",21]];
+  function hour(){const mid=scrollY+innerHeight*.5;const pts=ANCH.map(([id,h])=>[id==="top"?innerHeight*.5:(document.getElementById(id)?.offsetTop??0),h]);
+    if(mid<=pts[0][0])return 6;for(let i=0;i<pts.length-1;i++){const[a,ha]=pts[i],[b,hb]=pts[i+1];if(mid<=b)return ha+(hb-ha)*(mid-a)/Math.max(1,b-a)}return 21}
+  function fmt(h){const hh=Math.floor(h),mm=Math.floor((h-hh)*60/5)*5,ap=hh>=12?"PM":"AM",h12=((hh+11)%12)+1;return h12+":"+String(mm).padStart(2,"0")+" "+ap}
+  let W,H,DPR,ridgeA=[],ridgeB=[],last=0,t0=performance.now(),lastLabel="",stars=[];
+  function build(){W=innerWidth;H=innerHeight;DPR=Math.min(1.5,devicePixelRatio||1);cv.width=Math.round(W*DPR);cv.height=Math.round(H*DPR);cx.setTransform(DPR,0,0,DPR,0,0);
+    let a=0,b=0;ridgeA=[];ridgeB=[];for(let i=0;i<=60;i++){a+=(Math.random()-.5)*.5;a*=.9;b+=(Math.random()-.5)*.4;b*=.9;const e=Math.max(0,Math.abs(i/60-.5)*2-.2)/.8;ridgeA.push((.05+a*.02)*e);ridgeB.push((.028+b*.015)*e)}
+    stars=[];for(let i=0;i<90;i++)stars.push([Math.random(),Math.random()*.6,Math.random()*1.2+.3,Math.random()*6.3])}
+  function ridge(arr,hor,col){cx.fillStyle=rgb(col);cx.beginPath();cx.moveTo(0,hor);arr.forEach((v,i)=>cx.lineTo(i/60*W,hor-v*H));cx.lineTo(W,hor);cx.closePath();cx.fill()}
+  function draw(now){
+    const t=(now-t0)/1000,h=hour(),tau=(h-6)/15,P=pal(tau),hor=H*.86;
+    const label=fmt(h);if(clock&&label!==lastLabel){clock.textContent=label;lastLabel=label;if(clockIc)clockIc.dataset.night=h>=19.6?"1":"0"}
+    const g=cx.createLinearGradient(0,0,0,hor);g.addColorStop(0,rgb(P.sky[0]));g.addColorStop(.6,rgb(P.sky[1]));g.addColorStop(1,rgb(P.sky[2]));cx.fillStyle=g;cx.fillRect(0,0,W,hor);
+    if(tau>.75){const a=Math.min(1,(tau-.75)/.2);for(const s of stars){cx.fillStyle=`rgba(240,232,214,${a*(.35+.35*Math.sin(t*1.5+s[3]))})`;cx.beginPath();cx.arc(s[0]*W,s[1]*hor,s[2],0,6.283);cx.fill()}}
+    const sunT=Math.min(1,tau/.86),R=Math.min(W,H)*(W<700?.07:.06),sx=W*(.2+.7*sunT),sy=hor-Math.sin(Math.PI*sunT)*H*.55+(sunT>=1?(tau-.86)*H*2:0);
+    const halo=cx.createRadialGradient(sx,sy,0,sx,sy,R*7);halo.addColorStop(0,rgb(P.sun,.55));halo.addColorStop(.25,rgb(P.sun,.22));halo.addColorStop(1,rgb(P.sun,0));cx.fillStyle=halo;cx.fillRect(0,0,W,hor);
+    const core=cx.createRadialGradient(sx,sy,0,sx,sy,R);core.addColorStop(0,rgb(P.sun,1));core.addColorStop(.85,rgb(P.sun,.95));core.addColorStop(1,rgb(P.sun,0));cx.fillStyle=core;cx.beginPath();cx.arc(sx,sy,R,0,6.283);cx.fill();
+    if(tau>.9){const m=(tau-.9)/.1,mx=W*.8,my=hor-m*H*.45;cx.fillStyle="rgba(233,226,210,.9)";cx.beginPath();cx.arc(mx,my,R*.7,0,6.283);cx.fill();cx.fillStyle=rgb(P.sky[0]);cx.beginPath();cx.arc(mx+R*.3,my-R*.12,R*.62,0,6.283);cx.fill()}
+    ridge(ridgeA,hor,P.hills[0]);ridge(ridgeB,hor,P.hills[1]);
+    const sg=cx.createLinearGradient(0,hor,0,H);sg.addColorStop(0,rgb(P.sea[0]));sg.addColorStop(1,rgb(P.sea[1]));cx.fillStyle=sg;cx.fillRect(0,hor,W,H-hor);
+    if(sunT<1){for(let i=0;i<14;i++){const y=hor+3+i*((H-hor)/14),w=R*(1.6-i*.06)*(1+.15*Math.sin(t*1.3+i)),a=.35-i*.02;cx.fillStyle=rgb(P.sun,Math.max(0,a));cx.fillRect(sx-w/2+Math.sin(t+i)*3,y,w,1.4)}}
+    document.documentElement.style.setProperty("--tau",tau.toFixed(3));
+  }
+  function loop(now){if(now-last>50){last=now;draw(now)}requestAnimationFrame(loop)}
+  build();draw(performance.now());
+  if(reduce)addEventListener("scroll",()=>draw(performance.now()),{passive:true});else requestAnimationFrame(loop);
+  let rt;addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(()=>{build();draw(performance.now())},120)});
+})();
+/* the six steps: the pixel marker dials down the rail as you scroll and lights each step it reaches */
+(()=>{const tl=document.getElementById("timeline");if(!tl)return;const rail=tl.querySelector(".rail"),steps=[...tl.querySelectorAll(".step")],now=document.getElementById("stepnow");
+  function upd(){const rr=rail.getBoundingClientRect(),h=Math.max(0,Math.min(rr.height,innerHeight*.55-rr.top));rail.style.setProperty("--h",h+"px");
+    let n=0;steps.forEach((s,i)=>{const ic=s.querySelector(".li").getBoundingClientRect(),c=ic.top+ic.height/2-rr.top,on=h>=c-2;s.classList.toggle("lit",on);if(on)n=i+1});
+    if(now)now.textContent=String(Math.max(1,n)).padStart(2,"0")}
+  addEventListener("scroll",upd,{passive:true});addEventListener("resize",upd);upd();})();
+/* header glass + reveal */
+(()=>{const hd=document.querySelector("header.site");const f=()=>{hd.classList.toggle("solid",scrollY>30);hd.classList.toggle("night",document.getElementById("garden").getBoundingClientRect().top<70)};addEventListener("scroll",f,{passive:true});f();
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.12});
+  document.querySelectorAll(".rv").forEach(el=>io.observe(el));setTimeout(()=>document.querySelectorAll(".hero .rv").forEach(el=>el.classList.add("in")),80);})();
+</script>
+<script>
+/* Night garden, grain edition: a layered meadow of fine-line flowers. Statement blooms unfold as you arrive, light runs up the stems, fireflies drift, and touching a flower makes it bloom and release sparks. */
+(()=>{
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const garden=document.getElementById("garden"),cv=document.getElementById("flowers"),cx=cv.getContext("2d");
+  const INK="rgba(244,236,222,.92)",STEM="rgba(176,200,180,.7)";
+  const WASH={rose:"236,150,170",sage:"140,206,170",ochre:"236,186,96",mauve:"178,152,232",coral:"240,146,116",sky:"130,196,232",cream:"250,236,214"};
+  const WK=Object.keys(WASH);
+  const r=(a,b)=>a+Math.random()*(b-a),pick=a=>a[Math.floor(Math.random()*a.length)],cl=(v,a=0,b=1)=>Math.max(a,Math.min(b,v)),ease=t=>1-Math.pow(1-t,3);
+  let W,H,DPR,mob,plants=[],flies=[],sparks=[],run=false,seen=null,ptr={x:-999,y:-999,on:0},last=0,UF=1;
+  const TYPES=["tulip","poppy","lily","bells","daisy","fern","cosmos"];
+  function add(o){plants.push(Object.assign({ph:r(0,6.3),sp:r(.3,.6),amp:r(.02,.045),bend:r(-.1,.1),lean:0,dir:Math.random()<.5?-1:1,pulse:r(0,8),boost:0},o))}
+  function build(){DPR=Math.min(2,devicePixelRatio||1);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*DPR;cv.height=H*DPR;cx.setTransform(DPR,0,0,DPR,0,0);mob=W<700;plants=[];
+    // back layer: a soft meadow
+    const nb=Math.round(W/(mob?34:40));for(let i=0;i<nb;i++)add({layer:0,type:pick(TYPES),x:(i+r(0,1))/nb*W,h:H*r(.12,.26),s:r(7,11),wash:pick(WK),delay:r(0,1.2)});
+    // mid layer
+    const nm=Math.round(W/(mob?60:80));for(let i=0;i<nm;i++){const f=(i+r(.1,.9))/nm;add({layer:1,type:pick(TYPES),x:f*W,h:H*r(.2,.36)*(mob?1:(.7+.6*f)),s:r(12,17),wash:pick(WK),delay:r(.4,1.8)})}
+    // statement blooms: big, glowing, kept clear of the quote
+    const hero=mob?[[.78,.42,26,"lily"],[.18,.24,20,"poppy"],[.52,.3,22,"cosmos"]]:[[.86,.62,44,"lily"],[.7,.46,34,"poppy"],[.95,.36,28,"cosmos"],[.58,.3,26,"tulip"],[.08,.26,26,"lily"],[.36,.2,20,"cosmos"]];
+    hero.forEach(([fx,fh,s,type],i)=>add({layer:2,type,x:fx*W,h:H*fh,s:s*(mob?.9:1),wash:pick(["rose","mauve","coral","ochre","sky"]),delay:1+i*.35,amp:r(.015,.03)}));
+    plants.sort((a,b)=>a.layer-b.layer);
+    flies=[];for(let i=0;i<(mob?14:28);i++)flies.push({x:r(0,W),y:r(H*.35,H),vx:r(-6,6),vy:r(-4,4),ph:r(0,6.3),c:pick(["255,226,150","200,236,255","255,200,220"])});
+    sparks=[];}
+  function petal(len,wid,ang,fill){cx.save();cx.rotate(ang*UF);cx.beginPath();cx.moveTo(0,0);cx.bezierCurveTo(wid,-len*.25,wid*.8,-len*.9,0,-len);cx.bezierCurveTo(-wid*.8,-len*.9,-wid,-len*.25,0,0);if(fill){cx.fillStyle=fill;cx.fill()}cx.stroke();cx.restore()}
+  function leaf(x,y,len,wid,ang){cx.save();cx.translate(x,y);cx.rotate(ang);cx.strokeStyle=STEM;cx.beginPath();cx.moveTo(0,0);cx.bezierCurveTo(wid,-len*.3,wid*.6,-len*.85,0,-len);cx.bezierCurveTo(-wid*.6,-len*.85,-wid,-len*.3,0,0);cx.fillStyle="rgba(150,200,170,.09)";cx.fill();cx.stroke();cx.beginPath();cx.moveTo(0,0);cx.quadraticCurveTo(wid*.15,-len*.5,0,-len*.95);cx.stroke();cx.restore()}
+  const dot=(x,y,rr,c)=>{cx.fillStyle=c;cx.beginPath();cx.arc(x,y,rr,0,6.283);cx.fill()};
+  const HEAD={
+    tulip(s,w,o){const f=`rgba(${w},.4)`,op=.2+o*.12;petal(s*1.7,s*.78,-op,f);petal(s*1.7,s*.78,op,f);petal(s*1.85,s*.72,0,`rgba(${w},.3)`)},
+    poppy(s,w,o){const k=.9+o*.1;for(let i=0;i<5;i++)petal(s*1.3*k,s*1.15,i/5*6.283+.3,`rgba(${w},.36)`);for(let i=0;i<9;i++){const a=i/9*6.283;dot(Math.cos(a)*s*.3,Math.sin(a)*s*.3,Math.max(1,s*.05),INK)}cx.beginPath();cx.arc(0,0,s*.15,0,6.283);cx.stroke()},
+    lily(s,w,o){const k=.92+o*.1;for(let i=0;i<6;i++)petal(s*1.8*k,s*.44,i/6*6.283+(i%2?.14:0),`rgba(${w},.32)`);cx.save();cx.strokeStyle=INK;for(let i=0;i<5;i++){const a=-Math.PI/2+(i-2)*.3*UF,L=s*1.15;cx.beginPath();cx.moveTo(0,0);cx.quadraticCurveTo(Math.cos(a)*L*.5+s*.06,Math.sin(a)*L*.5,Math.cos(a)*L,Math.sin(a)*L);cx.stroke();cx.fillStyle=`rgba(${WASH.ochre},.95)`;cx.beginPath();cx.ellipse(Math.cos(a)*L,Math.sin(a)*L,Math.max(2,s*.09),Math.max(1,s*.045),a,0,6.283);cx.fill()}cx.restore()},
+    daisy(s,w,o){const k=.88+o*.12;for(let i=0;i<14;i++)petal(s*1.25*k,s*.24,i/14*6.283,`rgba(${w},.3)`);dot(0,0,s*.25,`rgba(${WASH.ochre},.9)`);cx.beginPath();cx.arc(0,0,s*.25,0,6.283);cx.stroke()},
+    cosmos(s,w,o){const k=.9+o*.12;for(let i=0;i<8;i++){cx.save();cx.rotate(i/8*6.283*UF+.2);cx.beginPath();cx.moveTo(0,0);cx.bezierCurveTo(s*.55,-s*.3,s*.6,-s*1.15,s*.18,-s*1.35*k);cx.lineTo(0,-s*1.22*k);cx.lineTo(-s*.18,-s*1.35*k);cx.bezierCurveTo(-s*.6,-s*1.15,-s*.55,-s*.3,0,0);cx.fillStyle=`rgba(${w},.34)`;cx.fill();cx.stroke();cx.restore()}dot(0,0,s*.22,`rgba(${WASH.ochre},.95)`)},
+    fern(){},
+  };
+  function bells(p,tx,ty,g,t){const s=p.s,ax=tx+p.dir*s*2.4,ay=ty+s*.4;cx.strokeStyle=STEM;cx.beginPath();cx.moveTo(tx,ty);cx.quadraticCurveTo(tx+p.dir*s*1.4,ty-s*1.1,ax,ay);cx.stroke();
+    if(g<.4)return;for(let j=1;j<=4;j++){const u=j/4.6,qx=(1-u)*(1-u)*tx+2*(1-u)*u*(tx+p.dir*s*1.4)+u*u*ax,qy=(1-u)*(1-u)*ty+2*(1-u)*u*(ty-s*1.1)+u*u*ay,sg=reduce?0:Math.sin(t*1.4+j+p.ph)*.12,d=s*.55,ex=qx+Math.sin(sg)*d,ey=qy+Math.cos(sg)*d,bs=s*.42*(1-j*.08)*cl((g-.4)/.6);
+      cx.strokeStyle=STEM;cx.beginPath();cx.moveTo(qx,qy);cx.lineTo(ex,ey);cx.stroke();cx.save();cx.translate(ex,ey);cx.rotate(-sg);cx.strokeStyle=INK;cx.fillStyle=`rgba(${WASH[p.wash]},.3)`;cx.beginPath();cx.moveTo(0,0);cx.bezierCurveTo(bs*1.1,0,bs*1.1,bs*1.3,bs*1.2,bs*1.7);cx.quadraticCurveTo(bs*.6,bs*1.4,0,bs*1.8);cx.quadraticCurveTo(-bs*.6,bs*1.4,-bs*1.2,bs*1.7);cx.bezierCurveTo(-bs*1.1,bs*1.3,-bs*1.1,0,0,0);cx.fill();cx.stroke();cx.restore()}}
+  function burst(x,y,c){for(let i=0;i<14;i++){const a=r(0,6.283),v=r(20,70);sparks.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-30,life:1,c})}}
+  function draw(now){
+    const t=now/1000,since=seen==null?-1:t-seen,wind=reduce?0:Math.sin(t*.3)*.03+Math.sin(t*.77)*.01;
+    cx.clearRect(0,0,W,H);
+    // moon glow behind the statement blooms
+    const mg=cx.createRadialGradient(W*(mob?.75:.82),H*.3,0,W*(mob?.75:.82),H*.3,Math.max(W,H)*.45);mg.addColorStop(0,"rgba(180,170,255,.10)");mg.addColorStop(1,"rgba(180,170,255,0)");cx.fillStyle=mg;cx.fillRect(0,0,W,H);
+    for(const p of plants){
+      const g=reduce?1:cl((since-p.delay)/(p.layer===2?2.6:2));if(g<=0)continue;const e=ease(g);
+      const near=ptr.on?cl(1-Math.hypot(p.x-ptr.x,(H-p.h*.8)-ptr.y)/(p.layer===2?220:170)):0;
+      p.lean+=((p.x>ptr.x?1:-1)*near*.22-p.lean)*.06;p.boost+=(near-p.boost)*.08;
+      const sw=(reduce?0:Math.sin(t*p.sp+p.ph)*p.amp)+wind*(p.layer===0?.6:1)+p.lean+p.bend,o=reduce?.5:(Math.sin(t*.8+p.ph)+1)/2;
+      const lw=p.layer===2?1.6:p.layer===1?1.2:.9;
+      cx.save();cx.globalAlpha=p.layer===0?.4:1;cx.lineWidth=lw;cx.lineCap="round";cx.lineJoin="round";
+      const len=p.h*e,bx=p.x,by=H+2,tx=bx+Math.sin(sw)*len,ty=by-Math.cos(sw)*len,mx=bx+Math.sin(sw*.4)*len*.5,my=by-len*.55;
+      if(p.type==="fern"){cx.lineWidth=lw*.9;for(let i=-2;i<=2;i++)leaf(bx+i*3,by,len*(1-Math.abs(i)*.16),p.s*.5,sw+i*.28);cx.restore();continue}
+      cx.strokeStyle=STEM;cx.beginPath();cx.moveTo(bx,by);cx.quadraticCurveTo(mx,my,tx,ty);cx.stroke();
+      leaf((bx+mx)/2,(by+my)/2+len*.18,len*.3,p.s*.55,-.55*p.dir+sw);if(p.layer===2)leaf(bx,by,len*.36,p.s*.5,.45*p.dir+sw);
+      // light running up the stem
+      if(!reduce&&p.layer>0&&g>=1){const q=((t+p.pulse)%5)/1.4;if(q<1){const u=q,px=(1-u)*(1-u)*bx+2*(1-u)*u*mx+u*u*tx,py=(1-u)*(1-u)*by+2*(1-u)*u*my+u*u*ty;const gl=cx.createRadialGradient(px,py,0,px,py,8);gl.addColorStop(0,`rgba(${WASH[p.wash]},.9)`);gl.addColorStop(1,`rgba(${WASH[p.wash]},0)`);cx.fillStyle=gl;cx.beginPath();cx.arc(px,py,8,0,6.283);cx.fill()}}
+      if(p.type==="bells"){cx.strokeStyle=INK;bells(p,tx,ty,g,t);cx.restore();continue}
+      if(g>.3){const bl=ease(cl((g-.3)/.7));UF=.15+.85*bl;const k=(.35+.65*bl)*(1+p.boost*.18);
+        if(p.layer===2){const hg=cx.createRadialGradient(tx,ty,0,tx,ty,p.s*3.4);hg.addColorStop(0,`rgba(${WASH[p.wash]},${.28+.12*o+p.boost*.2})`);hg.addColorStop(1,`rgba(${WASH[p.wash]},0)`);cx.fillStyle=hg;cx.beginPath();cx.arc(tx,ty,p.s*3.4,0,6.283);cx.fill()}
+        cx.save();cx.translate(tx,ty);cx.rotate(sw*1.1);cx.scale(k,k);cx.lineWidth=lw/k;cx.strokeStyle=INK;cx.shadowColor=`rgba(${WASH[p.wash]},.7)`;cx.shadowBlur=p.layer===2?26:16;HEAD[p.type](p.s,WASH[p.wash],o);cx.restore();UF=1;
+        if(p.boost>.6&&!p.burst){p.burst=1;burst(tx,ty,WASH[p.wash])}if(p.boost<.2)p.burst=0;}
+      cx.restore();
+    }
+    if(!reduce&&seen!=null){
+      for(const f of flies){f.x+=f.vx/30+Math.sin(t*.7+f.ph)*.5;f.y+=f.vy/30+Math.cos(t*.5+f.ph)*.4;if(f.x<0)f.x=W;if(f.x>W)f.x=0;if(f.y<H*.3)f.y=H;if(f.y>H)f.y=H*.35;
+        const a=.35+.65*Math.max(0,Math.sin(t*1.6+f.ph));const gl=cx.createRadialGradient(f.x,f.y,0,f.x,f.y,9);gl.addColorStop(0,`rgba(${f.c},${a})`);gl.addColorStop(1,`rgba(${f.c},0)`);cx.fillStyle=gl;cx.beginPath();cx.arc(f.x,f.y,9,0,6.283);cx.fill();dot(f.x,f.y,1.3,`rgba(255,255,255,${a})`)}
+      for(const s of sparks){s.x+=s.vx/30;s.y+=s.vy/30;s.vy+=1.2;s.vx*=.97;s.life-=.025;dot(s.x,s.y,1.6,`rgba(${s.c},${Math.max(0,s.life)})`)}
+      sparks=sparks.filter(s=>s.life>0);
+    }
+  }
+  function loop(now){if(!run)return;if(now-last>30){last=now;draw(now)}requestAnimationFrame(loop)}
+  build();draw(performance.now());
+  new IntersectionObserver(es=>{const vis=es[0].isIntersecting;if(vis&&seen==null)seen=performance.now()/1000;const was=run;run=vis&&!reduce;if(reduce&&vis)draw(performance.now());if(run&&!was)requestAnimationFrame(loop)},{threshold:.15}).observe(garden);
+  garden.addEventListener("pointermove",e=>{const b=cv.getBoundingClientRect();ptr.x=e.clientX-b.left;ptr.y=e.clientY-b.top;ptr.on=1});
+  garden.addEventListener("pointerdown",e=>{const b=cv.getBoundingClientRect();ptr.x=e.clientX-b.left;ptr.y=e.clientY-b.top;ptr.on=1;burst(ptr.x,ptr.y,pick(Object.values(WASH)))});
+  garden.addEventListener("pointerleave",()=>{ptr.on=0});
+  let rt;addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(()=>{build();draw(performance.now())},120)});
+})();
+</script>
+<script>
+document.querySelectorAll("a[data-open]").forEach(a=>a.addEventListener("click",()=>{const d=document.getElementById(a.getAttribute("href").slice(1));if(d&&d.tagName==="DETAILS")d.open=true}));
+document.querySelectorAll("[data-pick]").forEach(a=>a.addEventListener("click",()=>{const c=document.getElementById(a.dataset.pick);if(c&&!c.checked){c.checked=true;c.dispatchEvent(new Event("change",{bubbles:true}))}}));
+</script>
+
+
+
+</body></html>

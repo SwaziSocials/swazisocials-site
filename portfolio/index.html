@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Before &amp; After · Swazi Socials</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Websites and spaces by Swazi Socials, before and after.">
+<link rel="icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@300;400;500&family=Josefin+Sans:wght@300;400&display=swap">
+<style>
+:root{
+  --paper:#EEF0EA;--card:#F7F6F1;--ink:#1F2A3A;--muted:#55606A;--faint:#8C9193;
+  --lagoon:#1F5E6E;--lagoon-ink:#1F5E6E;--gold:#D7A752;--coral:#D98872;--pink:#C9748C;
+  --line:rgba(31,42,58,.12);--line-2:rgba(31,42,58,.24);
+  --display:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --body:"Inter","Helvetica Neue",Arial,system-ui,sans-serif;
+  --pixel:"Josefin Sans","Inter",sans-serif;
+  --wrap:1160px;--gutter:clamp(18px,3.4vw,40px);
+  --ease:cubic-bezier(.2,.7,.2,1);
+  --shadow:0 30px 70px -50px rgba(30,30,40,.45);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;color:var(--ink);font-family:var(--body);font-weight:300;font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  background:linear-gradient(180deg,#A9BFD6 0%,#D9C3CB 22%,#F1D9C6 42%,#EEF0EA 62%,#EEF0EA 100%);background-attachment:scroll;min-height:100vh}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.04;margin:0;letter-spacing:-.01em;text-wrap:balance}
+p{margin:0}a{color:inherit}img,video{display:block;max-width:100%}
+:focus-visible{outline:2px solid var(--lagoon);outline-offset:3px}
+.wrap{max-width:var(--wrap);margin-inline:auto;padding-inline:var(--gutter)}
+.eyebrow,.tag{font-family:var(--pixel);font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;color:var(--lagoon-ink);font-weight:400}
+.btn{display:inline-flex;align-items:center;gap:10px;font:500 .72rem var(--body);letter-spacing:.16em;text-transform:uppercase;padding:14px 22px;border-radius:2px;text-decoration:none;transition:background .3s,transform .3s var(--ease)}
+.btn-solid{background:var(--ink);color:#fff}.btn-solid:hover{background:var(--lagoon);transform:translateY(-2px)}
+
+header.site{padding:calc(env(safe-area-inset-top,0px) + 16px) 0 0}
+header .bar{display:flex;align-items:center;justify-content:space-between;gap:16px}
+header .brand img{height:44px;width:auto}
+header .back{font:400 .7rem var(--pixel);letter-spacing:.24em;text-transform:uppercase;text-decoration:none;color:var(--ink)}
+header .back:hover{color:var(--lagoon)}
+
+.hero{padding:clamp(48px,9vw,110px) 0 clamp(28px,5vw,56px)}
+.hero h1{font-size:clamp(3rem,9vw,6.2rem);margin-top:18px}
+.hero h1 em{color:var(--lagoon);font-style:italic}
+.hero p.lede{margin-top:18px;max-width:46ch;font-size:clamp(1rem,1.6vw,1.12rem);color:var(--ink)}
+.legend{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px}
+
+.group-h{display:flex;align-items:baseline;gap:14px;margin:clamp(34px,5vw,56px) 0 18px}
+.group-h h2{font-size:clamp(1.8rem,3.6vw,2.6rem)}
+.group-h .eyebrow{color:var(--muted)}
+
+.grid{display:grid;grid-template-columns:1fr;gap:clamp(18px,2.6vw,30px)}
+@media (min-width:860px){.grid{grid-template-columns:1fr 1fr}.grid.three>:first-child{grid-column:1/-1}}
+
+.card{background:color-mix(in srgb,var(--card) 92%,transparent);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.card .media{position:relative;aspect-ratio:16/9;background:#18181a}
+.card video,.card .media img{width:100%;height:100%;object-fit:cover}
+.card .body{padding:18px 20px 22px;display:grid;gap:8px}
+.card .top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.card h3{font-size:1.65rem;font-weight:500}
+.card p{color:var(--muted);font-size:.95rem;line-height:1.6}
+
+.status{display:inline-flex;align-items:center;gap:8px;font:400 .62rem var(--pixel);letter-spacing:.2em;text-transform:uppercase;padding:6px 10px;border:1px solid var(--line-2);border-radius:999px;white-space:nowrap;background:rgba(255,255,255,.5)}
+.status::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--faint)}
+.status.live::before{background:#2F8F5B}
+.status.preview::before{background:var(--gold)}
+.status.concept::before{background:var(--pink)}
+.status.soon::before{background:var(--lagoon)}
+
+.card.soon .media{display:grid;place-items:center;background:linear-gradient(135deg,#1F2A3A,#1F5E6E)}
+.card.soon .media span{font-family:var(--display);font-style:italic;color:#EEF0EA;font-size:clamp(1.6rem,4vw,2.2rem)}
+
+.note{margin:clamp(40px,6vw,70px) 0 0;padding:22px;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem;max-width:70ch}
+.cta{margin:26px 0 0;display:flex;gap:12px;flex-wrap:wrap}
+footer{margin-top:clamp(50px,7vw,90px);background:#0B0D0E;color:#EDEBE6;padding:34px 0 calc(34px + env(safe-area-inset-bottom,0px))}
+footer .bar{display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center}
+footer .tagline{font-family:var(--display);font-style:italic;font-size:1.1rem}
+footer small{font:400 .62rem var(--pixel);letter-spacing:.2em;text-transform:uppercase;color:rgba(237,235,230,.6)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn{transition:none}}
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="wrap bar">
+    <a class="brand" href="/" aria-label="Swazi Socials home"><img src="/img/logo-swazi.png" alt="Swazi Socials" width="1042" height="457"></a>
+    <a class="back" href="/">Back to home</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <span class="eyebrow">Portfolio · Websites and spaces</span>
+    <h1>Before <em>&amp;</em> After</h1>
+    <p class="lede">What each brand had before, and what we built. Every card plays on its own, without sound.</p>
+    <div class="legend" aria-label="Status labels">
+      <span class="status live">Live</span>
+      <span class="status preview">Preview, not live yet</span>
+      <span class="status concept">Concept, not built yet</span>
+    </div>
+  </section>
+
+  <div class="group-h"><h2>Our brands</h2><span class="eyebrow">In-house</span></div>
+  <div class="grid three">
+    <article class="card">
+      <div class="media"><video autoplay muted loop playsinline preload="metadata" poster="media/swazi-socials.jpg" aria-label="Swazi Socials website, before and after" src="media/swazi-socials.mp4"></video></div>
+      <div class="body"><div class="top"><h3>Swazi Socials</h3><span class="status live">Live</span></div>
+        <p>Rebuilt our own agency website. Before is the old site from the web archive (Sep 2024); after is the site live today.</p></div>
+    </article>
+    <article class="card">
+      <div class="media"><video autoplay muted loop playsinline preload="metadata" poster="media/speech-oclock.jpg" aria-label="Speech O'Clock store, before and after" src="media/speech-oclock.mp4"></video></div>
+      <div class="body"><div class="top"><h3>Speech O'Clock</h3><span class="status live">Live</span></div>
+        <p>Built the store for our communication support materials. There was no website before; the domain was parked.</p></div>
+    </article>
+    <article class="card">
+      <div class="media"><video muted loop playsinline preload="none" poster="media/native-nomads.jpg" aria-label="Native Nomads website, before and after" data-src="media/native-nomads.mp4"></video></div>
+      <div class="body"><div class="top"><h3>Native Nomads</h3><span class="status live">Live</span></div>
+        <p>Website refresh. The earlier site became a one-screen letter page for the ones who move.</p></div>
+    </article>
+  </div>
+
+  <div class="group-h"><h2>Clients &amp; collaborators</h2></div>
+  <div class="grid">
+    <article class="card">
+      <div class="media"><video muted loop playsinline preload="none" poster="media/sole-folks.jpg" aria-label="Sole Folks store, before and after" data-src="media/sole-folks.mp4"></video></div>
+      <div class="body"><div class="top"><h3>Sole Folks</h3><span class="status preview">Preview, not live yet</span></div>
+        <p>New store design for Leimert Park's creative co-op: new menu, product wall, studio access, events and the co-op story.</p></div>
+    </article>
+    <article class="card">
+      <div class="media"><video muted loop playsinline preload="none" poster="media/the-healing-temple.jpg" aria-label="The Healing Temple website, before and after" data-src="media/the-healing-temple.mp4"></video></div>
+      <div class="body"><div class="top"><h3>The Healing Temple</h3><span class="status live">Live</span></div>
+        <p>New website for soul growth coaching, replacing the old site builder page (web archive, Dec 2025).</p></div>
+    </article>
+    <article class="card">
+      <div class="media"><video muted loop playsinline preload="none" poster="media/buckets-academy.jpg" aria-label="Buckets Academy website, before and after" data-src="media/buckets-academy.mp4"></video></div>
+      <div class="body"><div class="top"><h3>Buckets Academy</h3><span class="status preview">Preview, not live yet</span></div>
+        <p>New website for a Los Angeles basketball program. Before, the store page read "This store is currently unavailable."</p></div>
+    </article>
+    <article class="card">
+      <div class="media"><video muted loop playsinline preload="none" poster="media/apx.jpg" aria-label="APX website, before and after" data-src="media/apx.mp4"></video></div>
+      <div class="body"><div class="top"><h3>APX</h3><span class="status preview">Preview, not live yet</span></div>
+        <p>First website for APX creative production: films, frames and ways to work together. APX had no site before.</p></div>
+    </article>
+    <article class="card">
+      <div class="media"><video muted loop playsinline preload="none" poster="media/wellness-house.jpg" aria-label="The Wellness House, showroom today and concept renderings" data-src="media/wellness-house.mp4"></video></div>
+      <div class="body"><div class="top"><h3>The Wellness House</h3><span class="status concept">Concept, not built yet</span></div>
+        <p>Location proposal for Akil West of Sole Folks: the showroom as it is today, and concept renderings of a juice bar, movement studio and recovery space.</p></div>
+    </article>
+    <article class="card soon">
+      <div class="media"><span>Coming soon</span></div>
+      <div class="body"><div class="top"><h3>Rebuild JA</h3><span class="status soon">In progress</span></div>
+        <p>The before is captured. The new site is next.</p></div>
+    </article>
+  </div>
+
+  <p class="note">Previews and concepts are shown as built and are not live yet. We'll swap each one for the live version once it launches.</p>
+  <div class="cta"><a class="btn btn-solid" href="/#contact">Start your before &amp; after</a></div>
+</main>
+
+<footer>
+  <div class="wrap bar"><span class="tagline">Growth systems, built and run for you.</span><small>© Swazi Socials</small></div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var vids = [].slice.call(document.querySelectorAll('.card video'));
+  if (reduce) { vids.forEach(function(v){ v.removeAttribute('autoplay'); v.pause(); v.controls = true; if (v.dataset.src) { v.src = v.dataset.src; v.removeAttribute('data-src'); } }); return; }
+  if (!('IntersectionObserver' in window)) { vids.forEach(function(v){ if (v.dataset.src) v.src = v.dataset.src; v.play && v.play().catch(function(){}); }); return; }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      var v = e.target;
+      if (e.isIntersecting) {
+        if (v.dataset.src) { v.src = v.dataset.src; v.removeAttribute('data-src'); v.load(); }
+        var p = v.play(); if (p && p.catch) p.catch(function(){});
+      } else if (!v.paused) { v.pause(); }
+    });
+  }, { rootMargin: '300px 0px' });
+  vids.forEach(function(v){ io.observe(v); });
+})();
+</script>
+</body>
+</html>
