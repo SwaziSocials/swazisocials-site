@@ -1,0 +1,121 @@
+<!doctype html><html lang="en"><head><title>Example Desk | Swazi Socials</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex">
+<style>
+/* Layout: the gold standard Desk (hero, start-here card, then cards top to bottom), in The Healing Temple palette from her website: olive, cream, gold. */
+:root{--bg:#FBF8F1;--ink:#22271B;--soft:#5E6354;--faint:#8A8E7D;--line:#E4DFCF;--well:#F3EEE0;--hero:#E9EBDA;--hero-ink:#3A4528;--accent:#8A6A2F;--card:#FFFFFF;--ok:#2F7A52;--warn:#A5482F;
+--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15190F;--ink:#EAE4D4;--soft:#B5B8A5;--faint:#80846F;--line:#2B3120;--well:#1C2115;--hero:#26301A;--hero-ink:#D9E1BE;--accent:#DEC08A;--card:#1A1F13;--ok:#7FD1A2;--warn:#F0A58F;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#15190F;--ink:#EAE4D4;--soft:#B5B8A5;--faint:#80846F;--line:#2B3120;--well:#1C2115;--hero:#26301A;--hero-ink:#D9E1BE;--accent:#DEC08A;--card:#1A1F13;--ok:#7FD1A2;--warn:#F0A58F;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 var(--sans)}
+.wrap{max-width:720px;margin:0 auto;padding-block:16px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:22px}
+a{color:var(--accent)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.hero{background:var(--hero);border-radius:16px;padding:16px 18px}
+.hero small{display:block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft)}
+.hero h1{margin:4px 0 2px;font-size:26px;line-height:1.1;text-wrap:balance}
+.hero p{margin:0;font-size:13.5px}
+.hero .goal{margin-top:12px;padding-top:10px;border-top:1px solid color-mix(in srgb,var(--hero-ink) 20%,transparent);color:var(--soft);font-size:13px}
+.hero .stamp{margin-top:6px;font-size:11px;color:var(--faint)}
+h2{font-size:17px;margin:2px 0 8px;text-wrap:balance}
+.kick{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--soft)}
+.need{background:var(--well);border-radius:12px;padding:12px 14px}
+.need.hl{background:var(--hero)}
+.need.start{border:2px solid var(--accent)}
+.need p{margin:0 0 6px;font-size:13.5px}
+.need ul{margin:0 0 8px;padding-left:18px;font-size:13.5px}
+.need li{margin:3px 0}
+.small{font-size:12.5px;color:var(--soft)}
+.tag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:6px;padding:1px 7px;background:var(--card);color:var(--hero-ink);margin-left:4px;white-space:nowrap}
+.tag.w{color:var(--warn)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:560px){.two{grid-template-columns:1fr}}
+.two .need{min-width:0}
+.links{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.link{display:flex;flex-direction:column;gap:2px;border:1px solid var(--line);border-radius:12px;padding:12px;text-decoration:none;color:var(--ink);background:var(--card);min-width:0}
+.link:hover{border-color:var(--accent)}
+.link span{font-size:18px}.link b{font-size:14px}.link i{font-style:normal;font-size:12px;color:var(--soft)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);font-weight:600}
+.scroll{overflow-x:auto}
+
+/* PIN lock (trial): hides the Desk until the viewer enters a 4 digit PIN they set on this device. */
+.lock{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;background:var(--bg);padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.lock[hidden]{display:none}
+.lock .box{width:min(360px,100%);background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px 20px;text-align:center;display:flex;flex-direction:column;gap:12px}
+.lock h2{margin:0;font-size:22px}
+.lock p{margin:0;font-size:13.5px;color:var(--soft)}
+.lock input{font:600 26px/1 var(--sans);letter-spacing:.5em;text-align:center;padding:12px 10px 12px 18px;border:1.5px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);width:100%}
+.lock input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.lock button{font:600 14px var(--sans);padding:13px;border:0;border-radius:999px;background:var(--hero-ink);color:var(--bg);cursor:pointer;min-height:46px}
+.lock .err{color:var(--warn);min-height:18px;font-size:13px}
+</style></head><body>
+<div class="lock" id="lock"><div class="box"><div style="font-size:34px" aria-hidden="true">&#128274;</div><h2 id="lt">Welcome to your Desk</h2><p id="ld">Set a 4 digit PIN. You will use it each time you open this Desk on this device.</p><input id="p1" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" aria-label="PIN"><input id="p2" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" aria-label="Repeat PIN"><div class="err" id="le" role="alert"></div><button id="lb" type="button">Set my PIN</button></div></div>
+<div class="wrap" id="app" hidden>
+<header class="hero">
+<small>Example Desk</small>
+<h1>&#127807; Your Desk</h1>
+<p>This is a sample of what a client Desk looks like at swazisocials.com. Nothing here belongs to a real client.</p>
+<p class="goal">Your goal goes here, in your own words.</p>
+<p class="stamp">Sample page &#183; each person sets their own 4 digit PIN on their device</p>
+</header>
+<section>
+<div class="need start">
+<div class="kick">Start here &#183; this week&#39;s focus</div>
+<h2>&#128221; One step at a time</h2>
+<ul><li><b>What it is:</b> the one thing that moves your plan forward this week.</li><li><b>Why first:</b> it feeds your Map, your Success Sheet and your calendar.</li></ul>
+</div>
+</section>
+<section>
+<div class="need hl">
+<div class="kick">Next actions</div>
+<h2>&#128197; The plan</h2>
+<div class="scroll"><table><tr><th>Step</th><th>Owner</th><th>Date</th></tr>
+<tr><td>Sample step one</td><td>You</td><td>Needs Confirmation</td></tr>
+<tr><td>Sample step two</td><td>Swazi Socials</td><td>Needs Confirmation</td></tr></table></div>
+</div>
+</section>
+<section>
+<h2>Your links</h2>
+<div class="links">
+<span class="link"><span aria-hidden="true">&#129517;</span><b>Your Map</b><i>Vision and plan</i></span>
+<span class="link"><span aria-hidden="true">&#9989;</span><b>Success Sheet</b><i>Every step, owner, date</i></span>
+<span class="link"><span aria-hidden="true">&#128221;</span><b>Meeting notes</b><i>All in one place</i></span>
+</div>
+</section>
+</div>
+<script>
+(function(){
+  var KEY='desk-pin:'+location.pathname, mem=null;
+  function get(){try{return localStorage.getItem(KEY)}catch(e){return mem}}
+  function put(v){try{localStorage.setItem(KEY,v)}catch(e){mem=v}}
+  function hash(p){var d=new TextEncoder().encode('desk|'+KEY+'|'+p);return crypto.subtle.digest('SHA-256',d).then(function(b){return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,'0')}).join('')})}
+  var lock=document.getElementById('lock'),app=document.getElementById('app'),p1=document.getElementById('p1'),p2=document.getElementById('p2'),lb=document.getElementById('lb'),le=document.getElementById('le'),lt=document.getElementById('lt'),ld=document.getElementById('ld');
+  var setup=!get(),tries=0,until=0;
+  function show(){lock.hidden=true;app.hidden=false}
+  function mode(){
+    if(setup){lt.textContent='Welcome to your Desk';ld.textContent='Set a 4 digit PIN. You will use it each time you open this Desk on this device.';p2.hidden=false;lb.textContent='Set my PIN'}
+    else{lt.textContent='Enter your PIN';ld.textContent='This Desk is private.';p2.hidden=true;lb.textContent='Open my Desk'}
+    p1.value='';p2.value='';le.textContent='';p1.focus()
+  }
+  function go(){
+    var a=p1.value,b=p2.value;
+    if(!/^[0-9]{4}$/.test(a)){le.textContent='Use exactly 4 digits.';return}
+    if(setup){
+      if(a!==b){le.textContent='The two PINs do not match.';return}
+      hash(a).then(function(h){put(h);setup=false;show()})
+    }else{
+      if(Date.now()<until){le.textContent='Too many tries. Wait a moment.';return}
+      hash(a).then(function(h){
+        if(h===get()){show()}
+        else{tries++;p1.value='';le.textContent='That PIN is not right.';if(tries>=5){until=Date.now()+30000;tries=0;le.textContent='Too many tries. Wait 30 seconds.'}}
+      })
+    }
+  }
+  lb.addEventListener('click',go);
+  [p1,p2].forEach(function(i){i.addEventListener('keydown',function(e){if(e.key==='Enter')go()})});
+  mode();
+})();
+</script>
+</body></html>
