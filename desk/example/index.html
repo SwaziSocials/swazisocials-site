@@ -51,7 +51,7 @@ th{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--sof
 .lock button{font:600 14px var(--sans);padding:13px;border:0;border-radius:999px;background:var(--hero-ink);color:var(--bg);cursor:pointer;min-height:46px}
 .lock .err{color:var(--warn);min-height:18px;font-size:13px}
 </style></head><body>
-<div class="lock" id="lock"><div class="box"><div style="font-size:34px" aria-hidden="true">&#128274;</div><h2 id="lt">Welcome to your Desk</h2><p id="ld">Set a 4 digit PIN. You will use it each time you open this Desk on this device.</p><input id="p1" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" aria-label="PIN"><input id="p2" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" aria-label="Repeat PIN"><div class="err" id="le" role="alert"></div><button id="lb" type="button">Set my PIN</button></div></div>
+<div class="lock" id="lock"><div class="box"><div style="font-size:34px" aria-hidden="true">&#128274;</div><h2 id="lt">Welcome, Ashley</h2><p id="ld">Enter your PIN.</p><input id="p1" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" aria-label="PIN"><div class="err" id="le" role="alert"></div><button id="lb" type="button">Open my Desk</button><p style="font-size:12.5px">If you have a question, text Ashley.</p></div></div>
 <div class="wrap" id="app" hidden>
 <header class="hero">
 <small>Example Desk</small>
@@ -91,31 +91,23 @@ th{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--sof
   function get(){try{return localStorage.getItem(KEY)}catch(e){return mem}}
   function put(v){try{localStorage.setItem(KEY,v)}catch(e){mem=v}}
   function hash(p){var d=new TextEncoder().encode('desk|'+KEY+'|'+p);return crypto.subtle.digest('SHA-256',d).then(function(b){return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,'0')}).join('')})}
-  var lock=document.getElementById('lock'),app=document.getElementById('app'),p1=document.getElementById('p1'),p2=document.getElementById('p2'),lb=document.getElementById('lb'),le=document.getElementById('le'),lt=document.getElementById('lt'),ld=document.getElementById('ld');
+  var lock=document.getElementById('lock'),app=document.getElementById('app'),p1=document.getElementById('p1'),lb=document.getElementById('lb'),le=document.getElementById('le'),ld=document.getElementById('ld');
   var setup=!get(),tries=0,until=0;
   function show(){lock.hidden=true;app.hidden=false}
-  function mode(){
-    if(setup){lt.textContent='Welcome to your Desk';ld.textContent='Set a 4 digit PIN. You will use it each time you open this Desk on this device.';p2.hidden=false;lb.textContent='Set my PIN'}
-    else{lt.textContent='Enter your PIN';ld.textContent='This Desk is private.';p2.hidden=true;lb.textContent='Open my Desk'}
-    p1.value='';p2.value='';le.textContent='';p1.focus()
-  }
+  if(setup){ld.textContent='Choose a 4 digit PIN. You will use it each time you open this Desk on this device.';lb.textContent='Set my PIN and open'}
+  p1.focus();
   function go(){
-    var a=p1.value,b=p2.value;
+    var a=p1.value;
     if(!/^[0-9]{4}$/.test(a)){le.textContent='Use exactly 4 digits.';return}
-    if(setup){
-      if(a!==b){le.textContent='The two PINs do not match.';return}
-      hash(a).then(function(h){put(h);setup=false;show()})
-    }else{
-      if(Date.now()<until){le.textContent='Too many tries. Wait a moment.';return}
-      hash(a).then(function(h){
-        if(h===get()){show()}
-        else{tries++;p1.value='';le.textContent='That PIN is not right.';if(tries>=5){until=Date.now()+30000;tries=0;le.textContent='Too many tries. Wait 30 seconds.'}}
-      })
-    }
+    if(setup){hash(a).then(function(h){put(h);setup=false;show()});return}
+    if(Date.now()<until){le.textContent='Too many tries. Wait a moment.';return}
+    hash(a).then(function(h){
+      if(h===get()){show()}
+      else{tries++;p1.value='';le.textContent='That PIN is not right.';if(tries>=5){until=Date.now()+30000;tries=0;le.textContent='Too many tries. Wait 30 seconds.'}}
+    })
   }
   lb.addEventListener('click',go);
-  [p1,p2].forEach(function(i){i.addEventListener('keydown',function(e){if(e.key==='Enter')go()})});
-  mode();
+  p1.addEventListener('keydown',function(e){if(e.key==='Enter')go()});
 })();
 </script>
 </body></html>
